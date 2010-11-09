@@ -10,7 +10,7 @@
 %define rel %nil
 Name: synaptic
 Version: 0.57.2
-Release: alt4
+Release: alt3.M51.1
 
 Summary: Graphical front-end for APT
 Summary(ru_RU.CP1251): Графическая оболочка для APT
@@ -133,6 +133,9 @@ install -p -m644 %SOURCE4 %buildroot%_sysconfdir/apt/apt.conf.d/%name.conf
 %exclude %_datadir/pixmaps/%name.png
 
 %changelog
+* Tue Nov 09 2010 Lenar Shakirov <snejok@altlinux.ru> 0.57.2-alt3.M51.1
+- backport to 5.1
+
 * Tue Nov 09 2010 Lenar Shakirov <snejok@altlinux.ru> 0.57.2-alt4
 - gcc 4.5 related fixes: synaptic-0.57.2-gcc4-fix.patch updated
 
