@@ -9,7 +9,7 @@
 
 Name: synaptic
 Version: 0.58
-Release: alt11
+Release: alt10.M60P.1
 
 Summary: Graphical front-end for APT
 Summary(ru_RU.UTF-8): Графическая оболочка для APT
@@ -127,6 +127,9 @@ install -p -m644 %SOURCE4 %buildroot%_sysconfdir/apt/apt.conf.d/%name.conf
 %exclude %_datadir/pixmaps/%name.png
 
 %changelog
+* Wed Dec 21 2011 Lenar Shakirov <snejok@altlinux.ru> 0.58-alt10.M60P.1
+- Backport to P6
+
 * Thu Nov 17 2011 Lenar Shakirov <snejok@altlinux.ru> 0.58-alt11
 - Fixes by NotHAM:
   * avoid annoying extra new lines in sources.list
