@@ -9,7 +9,7 @@
 
 Name: synaptic
 Version: 0.58
-Release: alt15
+Release: alt15.1
 
 Summary: Graphical front-end for APT
 Summary(ru_RU.UTF-8): Графическая оболочка для APT
@@ -130,6 +130,9 @@ install -p -m644 %SOURCE4 %buildroot%_sysconfdir/apt/apt.conf.d/%name.conf
 %exclude %_datadir/pixmaps/%name.png
 
 %changelog
+* Tue Nov 27 2018 Ivan Razzhivin <underwit@altlinux.org> 0.58-alt15.1
+- Add a patch for reset scroll position to zero point
+
 * Wed May 04 2016 Denis Medvedev <nbr@altlinux.org> 0.58-alt15
 - Fix bug with missing history.
 
