@@ -1,0 +1,25 @@
+diff --git a/synaptic/gtk/rgmainwindow.cc b/synaptic/gtk/rgmainwindow.cc
+index f25035a..db7d649 100644
+--- a/synaptic/gtk/rgmainwindow.cc
++++ b/synaptic/gtk/rgmainwindow.cc
+@@ -3263,9 +3263,9 @@ void RGMainWindow::cbGenerateDownloadScriptClicked(GtkWidget *self, void *data)
+    me->_lister->getStats(installed, broken, toInstall, toReInstall,
+ 			 toRemove, sizeChange);
+    if(toInstall+toReInstall == 0) {
+-      me->_userDialog->message("Nothing to install/upgrade\n\n"
++      me->_userDialog->message(_("Nothing to install/upgrade\n\n"
+ 			       "Please select the \"Mark all Upgrades\" "
+-			       "button or some packages to install/upgrade.");
++			       "button or some packages to install/upgrade."));
+       return;
+    }
+ 
+@@ -3347,7 +3347,7 @@ void RGMainWindow::cbAddDownloadedFilesClicked(GtkWidget *self, void *data)
+    me->cbProceedClicked(NULL, me);
+ 
+ #else
+-   me->_userDialog->error("Sorry, not implemented for rpm, patches welcome");
++   me->_userDialog->error(_("Sorry, not implemented for rpm, patches welcome"));
+ #endif
+ }
+ 
