@@ -13,16 +13,14 @@
 
 using namespace std;
 
-RGSlideShow::RGSlideShow(GtkImage * image, string imgPath)
+RGSlideShow::RGSlideShow(GtkImage * image, const string &imgPath)
 : _image(image), _totalSteps(0), _currentStep(0)
 {
    DIR *dir = opendir(imgPath.c_str());
-   struct dirent *entry;
-   imgPath += '/';
    if (dir != NULL) {
-      for (entry = readdir(dir); entry != NULL; entry = readdir(dir)) {
+      for (struct dirent *entry = readdir(dir); entry != NULL; entry = readdir(dir)) {
          if (entry->d_name[0] != '.')
-            _imageFileList.push_back(imgPath + entry->d_name);
+            _imageFileList.push_back(imgPath + '/' + entry->d_name);
       }
    }
    sort(_imageFileList.begin(), _imageFileList.end());

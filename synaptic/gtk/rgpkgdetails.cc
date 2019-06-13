@@ -50,7 +50,7 @@ void RGPkgDetailsWindow::cbCloseClicked(GtkWidget *self, void *data)
 }
 
 vector<string> 
-RGPkgDetailsWindow::formatDepInformation(vector<DepInformation> deps)
+RGPkgDetailsWindow::formatDepInformation(const vector<DepInformation> &deps)
 {
    vector<string> depStrings;
    string depStr;

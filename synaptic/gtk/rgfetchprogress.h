@@ -86,7 +86,7 @@ class RGFetchProgress : public pkgAcquireStatus, public RGGladeWindow {
    bool Pulse(pkgAcquire * Owner) override;
 
    // set description of the current task (main and additonal explaination)
-   void setDescription(string mainText, string secondText="");
+   void setDescription(const string &mainText, const string &secondText="");
 
 
    RGFetchProgress(RGWindow *win);

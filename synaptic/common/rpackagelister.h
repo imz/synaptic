@@ -200,7 +200,7 @@ class RPackageLister {
    vector<string> getSubViews();
 
    // set subView (if newView is empty, set to all packages)
-   bool setSubView(string newView="");
+   bool setSubView(const string &newView="");
 
    // this needs a different name, something like refresh
    void reapplyFilter();
@@ -221,7 +221,7 @@ class RPackageLister {
    RPackage *getPackage(int index) { return _packages.at(index); };
    RPackage *getViewPackage(int index) { return _viewPackages.at(index); };
    RPackage *getPackage(pkgCache::PkgIterator &pkg);
-   RPackage *getPackage(string name);
+   RPackage *getPackage(const string &name);
    int getPackageIndex(RPackage *pkg);
    int getViewPackageIndex(RPackage *pkg);
 
@@ -282,7 +282,7 @@ class RPackageLister {
 
    // some information
    bool getDownloadUris(vector<string> &uris);
-   bool addArchiveToCache(string archiveDir, string &pkgname);
+   bool addArchiveToCache(const string &archiveDir, string &pkgname);
 
    void setProgressMeter(OpProgress *progMeter) {
       if(_progMeter != NULL)

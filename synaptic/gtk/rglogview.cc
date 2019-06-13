@@ -230,7 +230,7 @@ void RGLogView::clearLogBuf()
 
 }
 
-void RGLogView::appendLogBuf(string text)
+void RGLogView::appendLogBuf(const string &text)
 {
    GtkTextBuffer *buffer;
    buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(_textView));

@@ -109,22 +109,22 @@ bool RSectionPackageFilter::filter(RPackage *pkg)
 }
 
 
-bool RSectionPackageFilter::write(ofstream &out, string pad)
+bool RSectionPackageFilter::write(ofstream &out, const string &pad)
 {
-   out << pad + "inclusive " << (_inclusive ? "true;" : "false;") << endl;
+   out << pad << "inclusive " << (_inclusive ? "true;" : "false;") << endl;
 
-   out << pad + "sections {" << endl;
+   out << pad << "sections {" << endl;
 
    for (int i = 0; i < count(); i++) {
-      out << pad + "  \"" << section(i) << "\"; " << endl;
+      out << pad << "  \"" << section(i) << "\"; " << endl;
    }
 
-   out << pad + "};" << endl;
+   out << pad << "};" << endl;
    return true;
 }
 
 
-bool RSectionPackageFilter::read(Configuration &conf, string key)
+bool RSectionPackageFilter::read(Configuration &conf, const string &key)
 {
    const Configuration::Item *top;
 
@@ -142,7 +142,7 @@ bool RSectionPackageFilter::read(Configuration &conf, string key)
 }
 
 
-bool RPatternPackageFilter::filterName(Pattern pat, RPackage *pkg)
+bool RPatternPackageFilter::filterName(const Pattern &pat, RPackage *pkg)
 {
    bool found=true;
 
@@ -163,7 +163,7 @@ bool RPatternPackageFilter::filterName(Pattern pat, RPackage *pkg)
 }
 
 
-bool RPatternPackageFilter::filterVersion(Pattern pat, RPackage *pkg)
+bool RPatternPackageFilter::filterVersion(const Pattern &pat, RPackage *pkg)
 {
    bool found = true;
 
@@ -185,7 +185,7 @@ bool RPatternPackageFilter::filterVersion(Pattern pat, RPackage *pkg)
    return found;
 }
 
-bool RPatternPackageFilter::filterDescription(Pattern pat, RPackage *pkg)
+bool RPatternPackageFilter::filterDescription(const Pattern &pat, RPackage *pkg)
 {
    bool found=true;
    const char *s1 = pkg->summary();
@@ -203,7 +203,7 @@ bool RPatternPackageFilter::filterDescription(Pattern pat, RPackage *pkg)
    return found;
 }
 
-bool RPatternPackageFilter::filterMaintainer(Pattern pat, RPackage *pkg)
+bool RPatternPackageFilter::filterMaintainer(const Pattern &pat, RPackage *pkg)
 {
    bool found=true;
    const char *maint = pkg->maintainer();
@@ -217,7 +217,7 @@ bool RPatternPackageFilter::filterMaintainer(Pattern pat, RPackage *pkg)
    return found;
 }
 
-bool RPatternPackageFilter::filterDepends(Pattern pat, RPackage *pkg,
+bool RPatternPackageFilter::filterDepends(const Pattern &pat, RPackage *pkg,
 					  pkgCache::Dep::DepType filterType)
 {
    vector<DepInformation> deps = pkg->enumDeps();
@@ -236,7 +236,7 @@ bool RPatternPackageFilter::filterDepends(Pattern pat, RPackage *pkg,
    return false;
 }
 
-bool RPatternPackageFilter::filterProvides(Pattern pat, RPackage *pkg)
+bool RPatternPackageFilter::filterProvides(const Pattern &pat, RPackage *pkg)
 {
    bool found = false;
    vector<string> provides = pkg->provides();
@@ -255,7 +255,7 @@ bool RPatternPackageFilter::filterProvides(Pattern pat, RPackage *pkg)
 }
 
 #if 0
-bool RPatternPackageFilter::filterWeakDepends(Pattern pat, RPackage *pkg)
+bool RPatternPackageFilter::filterWeakDepends(const Pattern &pat, RPackage *pkg)
 {
 
    bool found = false;
@@ -273,7 +273,7 @@ bool RPatternPackageFilter::filterWeakDepends(Pattern pat, RPackage *pkg)
 }
 #endif
 
-bool RPatternPackageFilter::filterRDepends(Pattern pat, RPackage *pkg)
+bool RPatternPackageFilter::filterRDepends(const Pattern &pat, RPackage *pkg)
 {
    vector<DepInformation> deps = pkg->enumRDeps();
 
@@ -288,7 +288,7 @@ bool RPatternPackageFilter::filterRDepends(Pattern pat, RPackage *pkg)
    }
    return false;
 }
-bool RPatternPackageFilter::filterOrigin(Pattern pat, RPackage *pkg)
+bool RPatternPackageFilter::filterOrigin(const Pattern &pat, RPackage *pkg)
 {
    bool found = false;
    string origin;
@@ -305,7 +305,7 @@ bool RPatternPackageFilter::filterOrigin(Pattern pat, RPackage *pkg)
    return found;
 }
 
-bool RPatternPackageFilter::filterComponent(Pattern pat, RPackage *pkg)
+bool RPatternPackageFilter::filterComponent(const Pattern &pat, RPackage *pkg)
 {
    bool found = false;
    string origin;
@@ -397,7 +397,7 @@ bool RPatternPackageFilter::filter(RPackage *pkg)
 }
 
 
-void RPatternPackageFilter::addPattern(DepType type, string pattern,
+void RPatternPackageFilter::addPattern(DepType type, const string &pattern,
                                        bool exclusive)
 {
    //cout << "adding pattern: " << pattern << endl;
@@ -431,29 +431,29 @@ void RPatternPackageFilter::addPattern(DepType type, string pattern,
 }
 
 
-bool RPatternPackageFilter::write(ofstream &out, string pad)
+bool RPatternPackageFilter::write(ofstream &out, const string &pad)
 {
    DepType type;
    string pat;
    bool excl;
 
-   out << pad + "andMode " << and_mode << ";" << endl;
+   out << pad << "andMode " << and_mode << ";" << endl;
 
-   out << pad + "patterns {" << endl;
+   out << pad << "patterns {" << endl;
 
    for (int i = 0; i < count(); i++) {
       getPattern(i, type, pat, excl);
-      out << pad + "  " + TypeName[(int)type] + ";"
+      out << pad << "  " << TypeName[(int)type] << ";"
          << " \"" << pat << "\"; " << (excl ? "true;" : "false;") << endl;
    }
 
-   out << pad + "};" << endl;
+   out << pad << "};" << endl;
 
    return true;
 }
 
 
-bool RPatternPackageFilter::read(Configuration &conf, string key)
+bool RPatternPackageFilter::read(Configuration &conf, const string &key)
 {
    const Configuration::Item *top;
    DepType type;
@@ -615,17 +615,17 @@ bool RStatusPackageFilter::filter(RPackage *pkg)
 }
 
 
-bool RStatusPackageFilter::write(ofstream &out, string pad)
+bool RStatusPackageFilter::write(ofstream &out, const string &pad)
 {
    char buf[16];
 
    snprintf(buf, sizeof(buf), "0x%x", _status);
 
-   out << pad + "flags" + " " << buf << ";" << endl;
+   out << pad << "flags" << " " << buf << ";" << endl;
    return true;
 }
 
-bool RStatusPackageFilter::read(Configuration &conf, string key)
+bool RStatusPackageFilter::read(Configuration &conf, const string &key)
 {
    _status = conf.FindI(key + "::flags", 0xffffff);
    return true;
@@ -638,13 +638,13 @@ bool RPriorityPackageFilter::filter(RPackage *pkg)
 }
 
 // mvo: FIXME!
-bool RPriorityPackageFilter::write(ofstream &out, string pad)
+bool RPriorityPackageFilter::write(ofstream &out, const string &pad)
 {
    return true;
 }
 
 // mvo: FIXME!
-bool RPriorityPackageFilter::read(Configuration &conf, string key)
+bool RPriorityPackageFilter::read(Configuration &conf, const string &key)
 {
    return true;
 }
@@ -683,7 +683,7 @@ bool RReducedViewPackageFilter::filter(RPackage *pkg)
    return true;
 }
 
-void RReducedViewPackageFilter::addFile(string FileName)
+void RReducedViewPackageFilter::addFile(const string &FileName)
 {
    FileFd F(FileName, FileFd::ReadOnly);
    if (_error->PendingError()) {
@@ -725,13 +725,13 @@ void RReducedViewPackageFilter::addFile(string FileName)
    }
 }
 
-bool RReducedViewPackageFilter::write(ofstream &out, string pad)
+bool RReducedViewPackageFilter::write(ofstream &out, const string &pad)
 {
-   out << pad + "enabled " << (_enabled ? "true" : "false") << ";" << endl;
+   out << pad << "enabled " << (_enabled ? "true" : "false") << ";" << endl;
    return true;
 }
 
-bool RReducedViewPackageFilter::read(Configuration &conf, string key)
+bool RReducedViewPackageFilter::read(Configuration &conf, const string &key)
 {
    _enabled = conf.FindB(key + "::enabled");
    if (_enabled == true) {
@@ -774,7 +774,7 @@ void RFilter::reset()
    reducedview.reset();
 }
 
-void RFilter::setName(string s)
+void RFilter::setName(const string &s)
 {
    if (s.empty()) {
       cerr <<
@@ -785,8 +785,7 @@ void RFilter::setName(string s)
       if (s.length() > 55) {
          cerr << "Internal Error: filter name is longer than 55 chars!? "
             "Will be truncated.Please report" << endl;
-         s.resize(55);
-         name = s;
+         name = s.substr(0, 55);
       } else {
          name = s;
       }
@@ -799,7 +798,7 @@ string RFilter::getName()
    return _(name.c_str());
 }
 
-bool RFilter::read(Configuration &conf, string key)
+bool RFilter::read(Configuration &conf, const string &key)
 {
    bool res = true;
 
@@ -831,25 +830,25 @@ bool RFilter::write(ofstream &out)
    out << "filter \"" << name << "\" {" << endl;
    string pad = "  ";
 
-   out << pad + "section {" << endl;
+   out << pad << "section {" << endl;
    res &= section.write(out, pad + "  ");
-   out << pad + "};" << endl;
+   out << pad << "};" << endl;
 
-   out << pad + "status {" << endl;
+   out << pad << "status {" << endl;
    res &= status.write(out, pad + "  ");
-   out << pad + "};" << endl;
+   out << pad << "};" << endl;
 
-   out << pad + "pattern {" << endl;
+   out << pad << "pattern {" << endl;
    res &= pattern.write(out, pad + "  ");
-   out << pad + "};" << endl;
+   out << pad << "};" << endl;
 
-   out << pad + "priority {" << endl;
+   out << pad << "priority {" << endl;
    res &= priority.write(out, pad + "  ");
-   out << pad + "};" << endl;
+   out << pad << "};" << endl;
 
-   out << pad + "reducedview {" << endl;
+   out << pad << "reducedview {" << endl;
    res &= reducedview.write(out, pad + "  ");
-   out << pad + "};" << endl;
+   out << pad << "};" << endl;
 
    out << "};" << endl;
 

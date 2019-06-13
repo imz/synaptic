@@ -56,9 +56,9 @@ class SourcesList {
       string Comment;
       string SourceFile;
 
-      bool SetType(string);
+      bool SetType(const string&);
       string GetType();
-      bool SetURI(string);
+      bool SetURI(const string&);
 
         SourceRecord():Type(0), Sections(0), NumSections(0) {
       };
@@ -84,21 +84,21 @@ class SourcesList {
 
  public:
    SourceRecord *AddSource(RecType Type,
-                           string VendorID,
-                           string URI,
-                           string Dist,
+                           const string &VendorID,
+                           const string &URI,
+                           const string &Dist,
                            string *Sections,
-                           unsigned short count, string SourceFile);
+                           unsigned short count, const string &SourceFile);
    SourceRecord *AddEmptySource();
    void RemoveSource(SourceRecord *&);
    void SwapSources( SourceRecord *&, SourceRecord *& );
-   bool ReadSourcePart(string listpath);
-   bool ReadSourceDir(string Dir);
+   bool ReadSourcePart(const string &listpath);
+   bool ReadSourceDir(const string &Dir);
    bool ReadSources();
    bool UpdateSources();
 
-   VendorRecord *AddVendor(string VendorID,
-                           string FingerPrint, string Description);
+   VendorRecord *AddVendor(const string &VendorID,
+                           const string &FingerPrint, const string &Description);
    void RemoveVendor(VendorRecord *&);
    bool ReadVendors();
    bool UpdateVendors();

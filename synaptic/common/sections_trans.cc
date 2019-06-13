@@ -97,7 +97,7 @@ char *transtable[][2] = {
 };
 
 #ifndef HAVE_RPM
-string trans_section(string sec)
+string trans_section(const string &sec)
 {
    string str = sec;
    string suffix;
@@ -138,7 +138,7 @@ string trans_section(string sec)
    return str;
 }
 #else
-string trans_section(string sec)
+string trans_section(const string &sec)
 {
    return dgettext("rpm", sec.c_str());
 }

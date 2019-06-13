@@ -31,7 +31,7 @@
 /*  the convention is that the top window is named:
    "window_$windowname" in your glade-source 
 */
-RGGladeWindow::RGGladeWindow(RGWindow *parent, string name, string mainName)
+RGGladeWindow::RGGladeWindow(RGWindow *parent, const string &name, const string &mainName)
 {
    //std::cout << "RGGladeWindow::RGGladeWindow(parent,name)" << endl;
 
@@ -132,7 +132,7 @@ bool RGGladeWindow::setLabel(const char *widget_name, const long value)
    return true;
 }
 
-bool RGGladeWindow::setTreeList(const char *widget_name, vector<string> values,
+bool RGGladeWindow::setTreeList(const char *widget_name, const vector<string> &values,
 				bool use_markup)
 {
    char *type;

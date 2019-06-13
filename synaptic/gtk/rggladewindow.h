@@ -42,7 +42,7 @@ class RGGladeWindow:public RGWindow {
    GdkCursor *_busyCursor;
 
  public:
-   RGGladeWindow(RGWindow *parent, string name, string main_widget = "");
+   RGGladeWindow(RGWindow *parent, const string &name, const string &main_widget = "");
 
    void skipTaskbar(bool value) {
       gtk_window_set_skip_taskbar_hint(GTK_WINDOW(_win), value);
@@ -57,7 +57,7 @@ class RGGladeWindow:public RGWindow {
    bool setTextView(const char *widget_name, const char *value,
 		    bool useHeadline=false);
    bool setPixmap(const char *widget_name, GdkPixbuf *value);
-   bool setTreeList(const char *widget_name, vector<string> values,
+   bool setTreeList(const char *widget_name, const vector<string> &values,
 		    bool useMarkup=false);
 
    GladeXML* getGladeXML() {return _gladeXML;};

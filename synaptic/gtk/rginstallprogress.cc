@@ -270,9 +270,9 @@ class GeometryParser {
       return _xpos != -1 && _ypos != -1;
    };
 
-   bool Parse(string Geo);
+   bool Parse(const string &Geo);
 
-   GeometryParser(string Geo = "")
+   GeometryParser(const string &Geo = "")
  :   _width(-1), _height(-1), _xpos(-1), _ypos(-1) {
       Parse(Geo);
    };
@@ -381,7 +381,7 @@ bool GeometryParser::ParsePosition(char **pos)
    return true;
 }
 
-bool GeometryParser::Parse(string Geo)
+bool GeometryParser::Parse(const string &Geo)
 {
    if (Geo.empty() == true)
       return false;

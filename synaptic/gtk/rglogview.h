@@ -48,7 +48,7 @@ class RGLogView : public RGGladeWindow {
 
    // set new logbuffer text
    void clearLogBuf();
-   void appendLogBuf(string text);
+   void appendLogBuf(const string &text);
 
  public:
    RGLogView(RGWindow *parent);

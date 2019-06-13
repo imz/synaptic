@@ -67,7 +67,7 @@ class RGRepositoryEditor:RGGladeWindow {
    GdkColor _gray;
 
    void UpdateVendorMenu();
-   int VendorMenuIndex(string VendorID);
+   int VendorMenuIndex(const string &VendorID);
 
    // static event handlers
    static void DoClear(GtkWidget *, gpointer);

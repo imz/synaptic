@@ -32,7 +32,7 @@ using namespace std;
 // IndexCopy::CopyPackages - Copy the package files from the CD         /*{{{*/
 // ---------------------------------------------------------------------
 /* */
-bool IndexCopy::CopyPackages(string CDROM, string Name,
+bool IndexCopy::CopyPackages(const string &CDROM, const string &Name,
                              vector<string> &List)
 {
    if (List.size() == 0)
@@ -44,7 +44,7 @@ bool IndexCopy::CopyPackages(string CDROM, string Name,
    bool Debug = _config->FindB("Debug::aptcdrom", false);
 
    // Prepare the progress indicator
-   unsigned long TotalSize = 0;
+   unsigned long long TotalSize = 0;
    for (vector<string>::iterator I = List.begin(); I != List.end(); I++) {
       struct stat Buf;
       if (stat(string(*I + GetFileName()).c_str(), &Buf) != 0 &&
@@ -54,13 +54,13 @@ bool IndexCopy::CopyPackages(string CDROM, string Name,
       TotalSize += Buf.st_size;
    }
 
-   unsigned long CurrentSize = 0;
+   unsigned long long CurrentSize = 0;
    unsigned int NotFound = 0;
    unsigned int WrongSize = 0;
    unsigned int Packages = 0;
    for (vector<string>::iterator I = List.begin(); I != List.end(); I++) {
       string OrigPath = string(*I, CDROM.length());
-      unsigned long FileSize = 0;
+      unsigned long long FileSize = 0;
 
       // Open the package file
       FileFd Pkg;
@@ -142,7 +142,7 @@ bool IndexCopy::CopyPackages(string CDROM, string Name,
       while (Parser.Step(Section) == true) {
          Progress.Progress(Parser.Offset());
          string File;
-         unsigned long Size;
+         unsigned long long Size;
          if (GetFile(File, Size) == false) {
             fclose(TargetFl);
             return false;
@@ -277,7 +277,7 @@ bool IndexCopy::CopyPackages(string CDROM, string Name,
 // IndexCopy::ChopDirs - Chop off the leading directory components      /*{{{*/
 // ---------------------------------------------------------------------
 /* */
-string IndexCopy::ChopDirs(string Path, unsigned int Depth)
+string IndexCopy::ChopDirs(const string &Path, unsigned int Depth)
 {
    string::size_type I = 0;
    do {
@@ -297,8 +297,8 @@ string IndexCopy::ChopDirs(string Path, unsigned int Depth)
 // ---------------------------------------------------------------------
 /* This prepends dir components from the path to the package files to
    the path to the deb until it is found */
-bool IndexCopy::ReconstructPrefix(string &Prefix, string OrigPath, string CD,
-                                  string File)
+bool IndexCopy::ReconstructPrefix(string &Prefix, const string &OrigPath, const string &CD,
+                                  const string &File)
 {
    bool Debug = _config->FindB("Debug::aptcdrom", false);
    unsigned int Depth = 1;
@@ -325,16 +325,17 @@ bool IndexCopy::ReconstructPrefix(string &Prefix, string OrigPath, string CD,
 // ---------------------------------------------------------------------
 /* This removes path components from the filename and prepends the location
    of the package files until a file is found */
-bool IndexCopy::ReconstructChop(unsigned long &Chop, string Dir, string File)
+bool IndexCopy::ReconstructChop(unsigned long &Chop, const string &Dir, const string &File)
 {
    // Attempt to reconstruct the filename
+   std::string current_file = File;
    unsigned long Depth = 0;
    while (1) {
       struct stat Buf;
-      if (stat(string(Dir + File).c_str(), &Buf) != 0) {
-         File = ChopDirs(File, 1);
+      if (stat(string(Dir + current_file).c_str(), &Buf) != 0) {
+         current_file = ChopDirs(current_file, 1);
          Depth++;
-         if (File.empty() == false)
+         if (current_file.empty() == false)
             continue;
          return false;
       } else {
@@ -362,7 +363,7 @@ bool IndexCopy::ReconstructChop(unsigned long &Chop, string Dir, string File)
    unstable/non-us) to increase the chance that each CD gets a single
    line in sources.list.
  */
-void IndexCopy::ConvertToSourceList(string CD, string &Path)
+void IndexCopy::ConvertToSourceList(const string &CD, string &Path)
 {
    char S[300];
    snprintf(S, sizeof(S), "binary-%s",
@@ -414,7 +415,7 @@ void IndexCopy::ConvertToSourceList(string CD, string &Path)
 // IndexCopy::GrabFirst - Return the first Depth path components        /*{{{*/
 // ---------------------------------------------------------------------
 /* */
-bool IndexCopy::GrabFirst(string Path, string &To, unsigned int Depth)
+bool IndexCopy::GrabFirst(const string &Path, string &To, unsigned int Depth)
 {
    string::size_type I = 0;
    do {
@@ -434,7 +435,7 @@ bool IndexCopy::GrabFirst(string Path, string &To, unsigned int Depth)
 // PackageCopy::GetFile - Get the file information from the section     /*{{{*/
 // ---------------------------------------------------------------------
 /* */
-bool PackageCopy::GetFile(string &File, unsigned long &Size)
+bool PackageCopy::GetFile(string &File, unsigned long long &Size)
 {
    File = Section->FindS("Filename");
    Size = Section->FindI("Size");
@@ -447,7 +448,7 @@ bool PackageCopy::GetFile(string &File, unsigned long &Size)
 // PackageCopy::RewriteEntry - Rewrite the entry with a new filename    /*{{{*/
 // ---------------------------------------------------------------------
 /* */
-bool PackageCopy::RewriteEntry(FILE *Target, string File)
+bool PackageCopy::RewriteEntry(FILE *Target, const string &File)
 {
    TFRewriteData Changes[] = { {"Filename", File.c_str()}
    ,
@@ -464,7 +465,7 @@ bool PackageCopy::RewriteEntry(FILE *Target, string File)
 // SourceCopy::GetFile - Get the file information from the section      /*{{{*/
 // ---------------------------------------------------------------------
 /* */
-bool SourceCopy::GetFile(string &File, unsigned long &Size)
+bool SourceCopy::GetFile(string &File, unsigned long long &Size)
 {
    string Files = Section->FindS("Files");
    if (Files.empty() == true)
@@ -495,7 +496,7 @@ bool SourceCopy::GetFile(string &File, unsigned long &Size)
 // SourceCopy::RewriteEntry - Rewrite the entry with a new filename     /*{{{*/
 // ---------------------------------------------------------------------
 /* */
-bool SourceCopy::RewriteEntry(FILE *Target, string File)
+bool SourceCopy::RewriteEntry(FILE *Target, const string &File)
 {
    string Dir(File, 0, File.rfind('/'));
    TFRewriteData Changes[] = { {"Directory", Dir.c_str()}

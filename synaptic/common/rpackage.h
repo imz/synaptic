@@ -194,7 +194,7 @@ class RPackage {
    void setRemoveWithDeps(bool shallow, bool purge = false);
 
    // mainpulate the candiate version
-   bool setVersion(string verTag);
+   bool setVersion(const string &verTag);
    void unsetVersion(); 
    string showWhyInstBroken();
 

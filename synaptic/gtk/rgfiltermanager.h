@@ -155,7 +155,7 @@ class RGFilterManagerWindow:public RGGladeWindow {
    GtkWidget *_patternList;     /* GtkTreeView */
    GtkListStore *_patternListStore;
    bool setPatternRow(int row, bool exclude,
-                      RPatternPackageFilter::DepType type, string pattern);
+                      RPatternPackageFilter::DepType type, const string &pattern);
    static void patternSelectionChanged(GtkTreeSelection *selection,
                                        gpointer data);
    static void patternChanged(GObject *o, gpointer data);

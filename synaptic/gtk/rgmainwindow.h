@@ -158,7 +158,7 @@ class RGMainWindow : public RGGladeWindow, public RPackageObserver {
    // helpers
    void pkgAction(RGPkgAction action);
    bool askStateChange(RPackageLister::pkgState, vector<RPackage *> &exclude);
-   bool checkForFailedInst(vector<RPackage *> instPkgs);
+   bool checkForFailedInst(const vector<RPackage *> &instPkgs);
    void pkgInstallHelper(RPackage *pkg, bool fixBroken = true, 
 			 bool reInstall = false);
    void pkgRemoveHelper(RPackage *pkg, bool purge = false,
@@ -179,15 +179,15 @@ class RGMainWindow : public RGGladeWindow, public RPackageObserver {
    }
 
  public:
-   RGMainWindow(RPackageLister *packLister, string name);
+   RGMainWindow(RPackageLister *packLister, const string &name);
    virtual ~RGMainWindow() {};
 
    void refreshTable(RPackage *selectedPkg = NULL,bool setAdjustments=true);
 
-   void changeView(int view, string subView="");
+   void changeView(int view, const string &subView="");
 
    // install the list of packagenames and display a changes window
-   void selectToInstall(vector<string> packagenames);
+   void selectToInstall(const vector<string> &packagenames);
    
 
    void setInterfaceLocked(bool flag);
@@ -222,7 +222,7 @@ class RGMainWindow : public RGGladeWindow, public RPackageObserver {
    static void cbTreeviewPopupMenu(GtkWidget *treeview,
                                    GdkEventButton *event,
                                    RGMainWindow *me,
-                                   vector<RPackage *> selected_pkgs);
+                                   const vector<RPackage *> &selected_pkgs);
 
    static void cbChangelogDialog(GtkWidget *self, void *data);
 

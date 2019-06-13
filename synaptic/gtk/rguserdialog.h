@@ -82,7 +82,7 @@ class RGGladeUserDialog : public RGUserDialog
     RGGladeUserDialog(RGWindow* parent, const char *name);
     virtual ~RGGladeUserDialog()  { gtk_widget_destroy(_dialog); };
 
-    void setTitle(string title) { 
+    void setTitle(const string &title) { 
        gtk_window_set_title(GTK_WINDOW(_dialog),title.c_str());
     }
 

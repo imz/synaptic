@@ -267,7 +267,7 @@ sigterm_iochn_data (GIOChannel *source,
 
 // test if a lock is aquired already, return 0 if no lock is found, 
 // the pid of the locking application or -1 on error
-pid_t TestLock(string File)
+pid_t TestLock(const string &File)
 {
    int FD = open(File.c_str(),0);
    if(FD < 0) {

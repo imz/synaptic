@@ -421,7 +421,7 @@ void RGRepositoryEditor::UpdateVendorMenu()
    gtk_option_menu_set_menu(GTK_OPTION_MENU(_optVendor), _optVendorMenu);
 }
 
-int RGRepositoryEditor::VendorMenuIndex(string VendorID)
+int RGRepositoryEditor::VendorMenuIndex(const string &VendorID)
 {
    int index = 0;
    for (VendorsListIter it = _lst.VendorRecords.begin();

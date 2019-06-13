@@ -44,7 +44,7 @@ class RGWindow {
       return _win;
    };
 
-   virtual void setTitle(string title);
+   virtual void setTitle(const string &title);
 
    inline virtual void hide() {
       gtk_widget_hide(_win);
@@ -54,8 +54,8 @@ class RGWindow {
    };
 
    RGWindow() : _win(0), _topBox(0) {};
-   RGWindow(string name, bool makeBox = true);
-   RGWindow(RGWindow *parent, string name, bool makeBox = true,
+   RGWindow(const string &name, bool makeBox = true);
+   RGWindow(RGWindow *parent, const string &name, bool makeBox = true,
             bool closable = true);
    virtual ~RGWindow();
 };
