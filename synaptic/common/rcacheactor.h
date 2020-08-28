@@ -47,14 +47,14 @@ class RCacheActor:public RCacheObserver {
 
    virtual void run(vector<RPackage *> &List, int Action) = 0;
 
-   virtual void notifyCachePreChange() {
+   virtual void notifyCachePreChange() override {
       updateState();
-   };
+   }
 
-   virtual void notifyCachePostChange();
+   virtual void notifyCachePostChange() override;
 
-   virtual void notifyCacheOpen() {
-   };
+   virtual void notifyCacheOpen() override {
+   }
 
    virtual void updateState() {
       delete _laststate;
@@ -110,9 +110,9 @@ class RCacheActorRecommends:public RCacheActor {
 
  public:
 
-   virtual void run(vector<RPackage *> &List, int Action);
+   virtual void run(vector<RPackage *> &List, int Action) override;
 
-   virtual void notifyCachePostChange();
+   virtual void notifyCachePostChange() override;
 
    RCacheActorRecommends(RPackageLister *lister, string FileName);
    virtual ~RCacheActorRecommends();

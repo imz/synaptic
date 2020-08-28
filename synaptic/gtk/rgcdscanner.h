@@ -43,7 +43,7 @@ class RGCDScanner:public RCDScanProgress, public RGWindow {
  public:
 
    RGCDScanner(RGMainWindow *main, RUserDialog *userDialog);
-   void update(string text, int current);
+   void update(string text, int current) override;
    bool run();
 
 };

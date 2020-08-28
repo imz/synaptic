@@ -39,7 +39,7 @@ class pkgCache;
 class RPkgPolicy : public pkgPolicy
 {
  public:
-   bool IsImportantDep(pkgCache::DepIterator dep);
+   bool IsImportantDep(pkgCache::DepIterator dep) override;
       
    RPkgPolicy(pkgCache *Owner):
       pkgPolicy(Owner) {};

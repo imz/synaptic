@@ -48,7 +48,7 @@ class RGInstallProgressMsgs:public RGGladeWindow {
 
    virtual bool empty();
    virtual void run();
-   virtual bool close();
+   virtual bool close() override;
 
    RGInstallProgressMsgs(RGWindow *win);
 };
@@ -72,9 +72,9 @@ class RGInstallProgress:public RInstallProgress, public RGGladeWindow {
    RGSlideShow *_ss;
 
  protected:
-   virtual void startUpdate();
-   virtual void updateInterface();
-   virtual void finishUpdate();
+   virtual void startUpdate() override;
+   virtual void updateInterface() override;
+   virtual void finishUpdate() override;
 
    virtual void prepare(RPackageLister *lister);
 

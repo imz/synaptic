@@ -142,7 +142,7 @@ class RGMainWindow : public RGGladeWindow, public RPackageObserver {
    // display/table releated
    void refreshSubViewList();
 
-   virtual bool close();
+   virtual bool close() override;
    static bool closeWin(GtkWidget *self, void *me) {
       return ((RGMainWindow *) me)->close();
    };
@@ -172,11 +172,11 @@ class RGMainWindow : public RGGladeWindow, public RPackageObserver {
    static void cbInstallFromVersion(GtkWidget *self, void *data);
 
    // RPackageObserver
-   virtual void notifyChange(RPackage *pkg);
-   virtual void notifyPreFilteredChange() {
-   };
-   virtual void notifyPostFilteredChange() {
-   };
+   virtual void notifyChange(RPackage *pkg) override;
+   virtual void notifyPreFilteredChange() override {
+   }
+   virtual void notifyPostFilteredChange() override {
+   }
 
  public:
    RGMainWindow(RPackageLister *packLister, string name);

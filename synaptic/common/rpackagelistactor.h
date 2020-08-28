@@ -44,12 +44,12 @@ class RPackageListActor : public RPackageObserver {
 
    virtual void run(vector<RPackage *> &List, int listEvent) = 0;
 
-   virtual void notifyPreFilteredChange() {
+   virtual void notifyPreFilteredChange() override {
       updateState();
-   };
+   }
 
-   virtual void notifyPostFilteredChange();
-   virtual void notifyChange(RPackage *pkg) {};
+   virtual void notifyPostFilteredChange() override;
+   virtual void notifyChange(RPackage *pkg) override {}
 
    virtual void updateState() {
       _lastDisplayList = _lister->getPackages();

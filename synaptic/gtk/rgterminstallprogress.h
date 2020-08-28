@@ -49,11 +49,11 @@ protected:
   bool child_has_exited;
   static void child_exited(VteReaper *vtereaper,gint child_pid, gint ret,
 			   gpointer data);
-  virtual void startUpdate();
-  virtual void updateInterface();
-  virtual void finishUpdate();
+  virtual void startUpdate() override;
+  virtual void updateInterface() override;
+  virtual void finishUpdate() override;
   static void stopShell(GtkWidget *self, void* data);
-  virtual bool close();
+  virtual bool close() override;
 
   pid_t _child_id;
 
@@ -63,7 +63,7 @@ public:
 
    virtual pkgPackageManager::OrderResult start(RPackageManager *pm,
 		   				int numPackages = 0,
-						int totalPackages = 0);
+						int totalPackages = 0) override;
 
 };
 

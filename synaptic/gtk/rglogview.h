@@ -53,7 +53,7 @@ class RGLogView : public RGGladeWindow {
  public:
    RGLogView(RGWindow *parent);
 
-   virtual void show();
+   virtual void show() override;
    void readLogs();
 
    virtual ~RGLogView() {};

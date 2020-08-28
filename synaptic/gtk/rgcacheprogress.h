@@ -43,8 +43,8 @@ class RGCacheProgress:public OpProgress {
       return _prog;
    };
 
-   virtual void Update();
-   virtual void Done();
+   virtual void Update() override;
+   virtual void Done() override;
 };
 
 

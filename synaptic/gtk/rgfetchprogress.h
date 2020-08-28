@@ -74,16 +74,16 @@ class RGFetchProgress : public pkgAcquireStatus, public RGGladeWindow {
    PangoFontDescription *_font;
 
  public:
-   virtual bool MediaChange(string Media, string Drive);
-   virtual void IMSHit(pkgAcquire::ItemDesc &Itm);
-   virtual void Fetch(pkgAcquire::ItemDesc &Itm);
-   virtual void Done(pkgAcquire::ItemDesc &Itm);
-   virtual void Fail(pkgAcquire::ItemDesc &Itm);
-   virtual void Start();
-   virtual void Stop();
-   virtual bool close();
+   virtual bool MediaChange(string Media, string Drive) override;
+   virtual void IMSHit(pkgAcquire::ItemDesc &Itm) override;
+   virtual void Fetch(pkgAcquire::ItemDesc &Itm) override;
+   virtual void Done(pkgAcquire::ItemDesc &Itm) override;
+   virtual void Fail(pkgAcquire::ItemDesc &Itm) override;
+   virtual void Start() override;
+   virtual void Stop() override;
+   virtual bool close() override;
 
-   bool Pulse(pkgAcquire * Owner);
+   bool Pulse(pkgAcquire * Owner) override;
 
    // set description of the current task (main and additonal explaination)
    void setDescription(string mainText, string secondText="");

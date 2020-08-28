@@ -20,9 +20,9 @@ public:
   pkgAcqFileSane(pkgAcquire *Owner, string URI,
 		 string Description, string ShortDesc, string filename);
 
-  void Failed(string Message, pkgAcquire::MethodConfig *Cnf);
-  string MD5Sum() {return Md5Hash;}
-  string DescURI() {return Desc.URI;}
+  void Failed(string Message, pkgAcquire::MethodConfig *Cnf) override;
+  string MD5Sum() override {return Md5Hash;}
+  string DescURI() override {return Desc.URI;}
   virtual ~pkgAcqFileSane() {}
 };
 

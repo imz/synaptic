@@ -67,7 +67,7 @@ class RCacheActorPkgList : public RCacheActor {
 
    public:
 
-   virtual void run(vector<RPackage *> &List, int Action);
+   virtual void run(vector<RPackage *> &List, int Action) override;
 
    RCacheActorPkgList(RPackageLister *lister,
                       GtkPkgList *pkgList,
@@ -85,7 +85,7 @@ class RPackageListActorPkgList:public RPackageListActor {
 
    public:
 
-   virtual void run(vector<RPackage *> &List, int listEvent);
+   virtual void run(vector<RPackage *> &List, int listEvent) override;
 
    RPackageListActorPkgList(RPackageLister *lister,
                             GtkPkgList *pkgList,

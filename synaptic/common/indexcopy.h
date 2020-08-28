@@ -44,14 +44,14 @@ class IndexCopy {
 class PackageCopy:public IndexCopy {
  protected:
 
-   virtual bool GetFile(string &Filename, unsigned long &Size);
-   virtual bool RewriteEntry(FILE *Target, string File);
-   virtual const char *GetFileName() {
+   virtual bool GetFile(string &Filename, unsigned long &Size) override;
+   virtual bool RewriteEntry(FILE *Target, string File) override;
+   virtual const char *GetFileName() override {
       return "Packages";
-   };
-   virtual const char *Type() {
+   }
+   virtual const char *Type() override {
       return "Package";
-   };
+   }
 
  public:
 };
@@ -59,14 +59,14 @@ class PackageCopy:public IndexCopy {
 class SourceCopy:public IndexCopy {
  protected:
 
-   virtual bool GetFile(string &Filename, unsigned long &Size);
-   virtual bool RewriteEntry(FILE *Target, string File);
-   virtual const char *GetFileName() {
+   virtual bool GetFile(string &Filename, unsigned long &Size) override;
+   virtual bool RewriteEntry(FILE *Target, string File) override;
+   virtual const char *GetFileName() override {
       return "Sources";
-   };
-   virtual const char *Type() {
+   }
+   virtual const char *Type() override {
       return "Source";
-   };
+   }
 
  public:
 };

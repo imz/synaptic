@@ -122,7 +122,7 @@ class RGPreferencesWindow:public RGGladeWindow {
  public:
    RGPreferencesWindow(RGWindow *owner, RPackageLister *lister);
    virtual ~RGPreferencesWindow() {};
-   virtual void show();
+   virtual void show() override;
 
    // call this to set the proxy stuff for apt
    static void applyProxySettings();

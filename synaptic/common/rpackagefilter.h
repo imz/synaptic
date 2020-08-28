@@ -77,12 +77,12 @@ class RSectionPackageFilter : public RPackageFilter {
    RSectionPackageFilter() : _inclusive(false) {};
    virtual ~RSectionPackageFilter() {};
 
-   inline virtual void reset() {
+   inline virtual void reset() override {
       clear();
       _inclusive = false;
-   };
+   }
 
-   inline virtual const char *type() { return RPFSection; };
+   inline virtual const char *type() override { return RPFSection; }
 
    void setInclusive(bool flag) { _inclusive = flag; };
    bool inclusive();
@@ -92,9 +92,9 @@ class RSectionPackageFilter : public RPackageFilter {
    string section(int index);
    void clear();
 
-   virtual bool filter(RPackage *pkg);
-   virtual bool read(Configuration &conf, string key);
-   virtual bool write(ofstream &out, string pad);
+   virtual bool filter(RPackage *pkg) override;
+   virtual bool read(Configuration &conf, string key) override;
+   virtual bool write(ofstream &out, string pad) override;
 };
 
 
@@ -149,9 +149,9 @@ class RPatternPackageFilter : public RPackageFilter {
    RPatternPackageFilter(RPatternPackageFilter &f);
    virtual ~RPatternPackageFilter();
 
-   inline virtual void reset() { clear(); };
+   inline virtual void reset() override { clear(); }
 
-   inline virtual const char *type() { return RPFPattern; };
+   inline virtual const char *type() override { return RPFPattern; }
 
    void addPattern(DepType type, string pattern, bool exclusive);
    inline int count() { return _patterns.size(); };
@@ -165,9 +165,9 @@ class RPatternPackageFilter : public RPackageFilter {
    bool getAndMode() { return and_mode; };
    void setAndMode(bool b) { and_mode=b; };
 
-   virtual bool filter(RPackage *pkg);
-   virtual bool read(Configuration &conf, string key);
-   virtual bool write(ofstream &out, string pad);
+   virtual bool filter(RPackage *pkg) override;
+   virtual bool read(Configuration &conf, string key) override;
+   virtual bool write(ofstream &out, string pad) override;
 };
 
 
@@ -199,16 +199,16 @@ class RStatusPackageFilter : public RPackageFilter {
 
    RStatusPackageFilter() : _status(~0)
    {};
-   inline virtual void reset() { _status = ~0; };
+   inline virtual void reset() override { _status = ~0; }
 
-   inline virtual const char *type() { return RPFStatus; };
+   inline virtual const char *type() override { return RPFStatus; }
 
    inline void setStatus(int status) { _status = status; };
    inline int status() { return _status; };
 
-   virtual bool filter(RPackage *pkg);
-   virtual bool read(Configuration &conf, string key);
-   virtual bool write(ofstream &out, string pad);
+   virtual bool filter(RPackage *pkg) override;
+   virtual bool read(Configuration &conf, string key) override;
+   virtual bool write(ofstream &out, string pad) override;
 };
 
 
@@ -220,13 +220,13 @@ class RPriorityPackageFilter:public RPackageFilter {
 
    RPriorityPackageFilter()  {};
 
-   inline virtual void reset() {};
+   inline virtual void reset() override {}
 
-   inline virtual const char *type() { return RPFPriority; };
+   inline virtual const char *type() override { return RPFPriority; }
 
-   virtual bool filter(RPackage *pkg);
-   virtual bool read(Configuration &conf, string key);
-   virtual bool write(ofstream &out, string pad);
+   virtual bool filter(RPackage *pkg) override;
+   virtual bool read(Configuration &conf, string key) override;
+   virtual bool write(ofstream &out, string pad) override;
 };
 
 
@@ -249,13 +249,13 @@ class RReducedViewPackageFilter : public RPackageFilter {
    RReducedViewPackageFilter() : _enabled(false) {};
    ~RReducedViewPackageFilter();
 
-   inline virtual void reset() { _hide.clear(); };
+   inline virtual void reset() override { _hide.clear(); }
 
-   inline virtual const char *type() { return RPFReducedView; };
+   inline virtual const char *type() override { return RPFReducedView; }
 
-   virtual bool filter(RPackage *pkg);
-   virtual bool read(Configuration &conf, string key);
-   virtual bool write(ofstream &out, string pad);
+   virtual bool filter(RPackage *pkg) override;
+   virtual bool read(Configuration &conf, string key) override;
+   virtual bool write(ofstream &out, string pad) override;
 
    void enable() { _enabled = true; };
    void disable() { _enabled = false; };

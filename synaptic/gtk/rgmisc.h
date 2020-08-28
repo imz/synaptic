@@ -70,7 +70,7 @@ class RGPackageStatus : public RPackageStatus {
    // this static object is used for all access
    static RGPackageStatus pkgStatus;
 
-   virtual void init();
+   virtual void init() override;
    
    // this is what the package listers use
    GdkColor *getBgColor(RPackage *pkg);
