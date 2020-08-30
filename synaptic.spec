@@ -63,6 +63,8 @@ intltoolize --force
 %autoreconf
 %endif
 
+# Ensure the code can be compiled as C++11 (and the future GCC default dialect).
+%add_optflags -std=gnu++11
 # To avoid some errors on API change:
 %add_optflags -Werror=overloaded-virtual
 # A style enforcement: always use the keyword, which helps to avoid API misuse
