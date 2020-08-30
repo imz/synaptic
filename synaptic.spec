@@ -63,6 +63,8 @@ intltoolize --force
 %autoreconf
 %endif
 
+# To avoid some errors on API change:
+%add_optflags -Werror=overloaded-virtual
 %add_optflags -fno-exceptions
 %ifarch %e2k
 %add_optflags -std=c++14
