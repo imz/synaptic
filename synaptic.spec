@@ -63,6 +63,9 @@ intltoolize --force
 %autoreconf
 %endif
 
+# Ensure the code can be compiled as C++11 (and the future GCC default dialect).
+%add_optflags -std=gnu++11
+
 %add_optflags -fno-exceptions
 %ifarch %e2k
 %add_optflags -std=c++14
