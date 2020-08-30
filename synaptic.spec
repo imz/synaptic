@@ -55,10 +55,6 @@ Synaptic - это графическая оболочка для APT (Advanced P
 %setup
 %patch1 -p1
 
-# remove gmo file to tell autotools recreate it
-rm -fv -- po/ru.gmo
-rm -fv -- po/uk.gmo
-
 install -p -m644 %SOURCE1 pixmaps/hicolor/16x16/package-supported.png
 
 %build
