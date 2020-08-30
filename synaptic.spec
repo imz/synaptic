@@ -92,8 +92,6 @@ install -p -m644 %SOURCE2 %buildroot%_sysconfdir/apt/apt.conf.d/%name.conf
 
 %exclude %_desktopdir/%{name}*.desktop
 %exclude %_datadir/pixmaps/%name.png
-# find_lang misses this locale
-%exclude %_datadir/locale/sr@Latn
 
 %changelog
 * Tue Jul 30 2019 Aleksei Nikiforov <darktemplar@altlinux.org> 0.58-alt23
