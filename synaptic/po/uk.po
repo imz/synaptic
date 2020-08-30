@@ -1,7 +1,7 @@
 # Ukrainian translation for synaptic
 # Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
 # This file is distributed under the same license as the synaptic package.
-# 
+#
 # Roman Savochenko <rom_as@altlinux.ru>, 2011.
 #
 msgid ""
