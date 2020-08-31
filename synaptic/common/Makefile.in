@@ -185,8 +185,6 @@ libsynaptic_a_SOURCES = \
 	pkg_acqfile.h\
 	rconfiguration.cc\
 	rconfiguration.h\
-	rswig.h\
-	rswig.cc\
 	rinstallprogress.cc\
 	rinstallprogress.h\
 	rpackage.cc\
@@ -235,7 +233,7 @@ LIBRARIES = $(noinst_LIBRARIES)
 libsynaptic_a_AR = $(AR) cru
 libsynaptic_a_LIBADD =
 am_libsynaptic_a_OBJECTS = pkg_acqfile.$(OBJEXT) \
-	rconfiguration.$(OBJEXT) rswig.$(OBJEXT) \
+	rconfiguration.$(OBJEXT) \
 	rinstallprogress.$(OBJEXT) rpackage.$(OBJEXT) \
 	rpackagecache.$(OBJEXT) rpackagefilter.$(OBJEXT) \
 	rpackagelister.$(OBJEXT) rpackageview.$(OBJEXT) \
@@ -263,7 +261,7 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@	./$(DEPDIR)/rpackagelister.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/rpackageview.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/rpmindexcopy.Po ./$(DEPDIR)/rsources.Po \
-@AMDEP_TRUE@	./$(DEPDIR)/rswig.Po ./$(DEPDIR)/rtagcollbuilder.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/rtagcollbuilder.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/rtagcollfilter.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/ruserdialog.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/sections_trans.Po
@@ -320,7 +318,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rpackageview.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rpmindexcopy.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rsources.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rswig.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rtagcollbuilder.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rtagcollfilter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ruserdialog.Po@am__quote@
