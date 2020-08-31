@@ -69,6 +69,7 @@ intltoolize --force
 %add_optflags -Werror=overloaded-virtual
 # A style enforcement: always use the keyword, which helps to avoid API misuse
 %add_optflags -Werror=suggest-override
+%add_optflags -Werror=return-type
 %add_optflags -fno-exceptions
 %ifarch %e2k
 %add_optflags -std=c++14
