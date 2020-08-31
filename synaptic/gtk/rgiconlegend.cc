@@ -72,8 +72,8 @@ RGIconLegendPanel::RGIconLegendPanel(RGWindow *parent)
 
    pix = gtk_image_new_from_pixbuf(pixbuf);
    gtk_box_pack_start(GTK_BOX(hbox), pix, FALSE, FALSE, 0);
-   label = gtk_label_new(_(_config->Find("Synaptic::supported-text",
-				       "Package is supported").c_str()));
+   label = gtk_label_new(_config->Find("Synaptic::supported-text",
+				       _("Package is supported")).c_str());
    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
 
