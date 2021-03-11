@@ -1,11 +1,11 @@
 /* rpackagecache.cc - package cache wrapper
- * 
- * Copyright (c) 2000-2003 Conectiva S/A 
- * 
+ *
+ * Copyright (c) 2000-2003 Conectiva S/A
+ *
  * Author: Alfredo K. Kojima <kojima@conectiva.com.br>
  *
- * This program is free software; you can redistribute it and/or 
- * modify it under the terms of the GNU General Public License as 
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
@@ -139,7 +139,7 @@ vector<string> RPackageCache::getPolicyArchives(bool filenames_only=false)
 	    archives.push_back(F.FileName());
       } else {
 	 if (!F.RelStr().empty()) {
-	    //printf("Archive: %s, Origin: %s, Component: %s, Filename: %s\n", 
+	    //printf("Archive: %s, Origin: %s, Component: %s, Filename: %s\n",
 	    //       F.Archive(), F.Origin(), F.Component(), F.FileName());
 	    if (F.Archive() != NULL) {
 	       if (find(archives.begin(), archives.end(), F.Archive())
