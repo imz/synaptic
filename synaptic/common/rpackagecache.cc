@@ -92,7 +92,7 @@ Go to the repository dialog to correct the problem."));
       return false;
 
    // Create the dependency cache
-   _cache.reset(new pkgCache(_map.get()));
+   _cache.reset(new pkgCache(*_map));
    if (_error->PendingError())
       return false;
 
