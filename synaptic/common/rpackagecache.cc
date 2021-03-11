@@ -59,14 +59,10 @@ bool RPackageCache::open(OpProgress &progress, bool locking)
       return false;
 
    // delete any old structures
-   if(_dcache)
-      delete _dcache;
-   if(_policy)
-      delete _policy;
-   if(_cache)
-      delete _cache;
-   if(_map)
-      delete _map;
+   _dcache.reset();
+   _policy.reset();
+   _cache.reset();
+   _map.reset();
 
    // Read the source list
    //pkgSourceList list;
@@ -91,16 +87,16 @@ Go to the repository dialog to correct the problem."));
    if (_error->PendingError())
       return false;
 
-   _map = new MMap(File, MMap::Public | MMap::ReadOnly);
+   _map.reset(new MMap(File, MMap::Public | MMap::ReadOnly));
    if (_error->PendingError())
       return false;
 
    // Create the dependency cache
-   _cache = new pkgCache(_map);
+   _cache.reset(new pkgCache(_map.get()));
    if (_error->PendingError())
       return false;
 
-   _policy = new RPkgPolicy(_cache);
+   _policy.reset(new RPkgPolicy(_cache.get()));
    if (_error->PendingError() == true)
       return false;
    if (ReadPinFile(*_policy) == false)
@@ -109,7 +105,7 @@ Go to the repository dialog to correct the problem."));
    if (ReadPinFile(*_policy, RStateDir() + "/preferences") == false)
       return false;
 
-   _dcache = new pkgDepCache(_cache, _policy);
+   _dcache.reset(new pkgDepCache(_cache.get(), _policy.get()));
    _dcache->Init(&progress);
 
    //progress.Done();

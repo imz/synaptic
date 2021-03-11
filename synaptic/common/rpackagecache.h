@@ -31,6 +31,8 @@
 #include <apt-pkg/pkgsystem.h>
 #include <apt-pkg/policy.h>
 
+#include <memory>
+
 class OpProgress;
 
 class pkgCache;
@@ -48,19 +50,19 @@ class RPkgPolicy : public pkgPolicy
 };
 
 class RPackageCache {
-   MMap *_map;
+   std::unique_ptr<MMap> _map;
 
-   pkgCache *_cache;
-   RPkgPolicy *_policy;
+   std::unique_ptr<pkgCache>_cache;
+   std::unique_ptr<RPkgPolicy> _policy;
 
-   pkgDepCache *_dcache;
+   std::unique_ptr<pkgDepCache> _dcache;
    pkgSourceList *_list;
 
    bool _locked;
 
  public:
    inline pkgDepCache *deps() {
-      return _dcache;
+      return _dcache.get();
    };
    inline pkgSourceList *list() {
       return _list;
@@ -74,7 +76,7 @@ class RPackageCache {
    void releaseLock();
 
    RPackageCache()
-     : _map(0), _cache(0), _policy(0), _dcache(0), _locked(false)
+     : _locked(false)
    {
       _list = new pkgSourceList();
    };
