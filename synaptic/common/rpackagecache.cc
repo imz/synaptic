@@ -71,10 +71,10 @@ bool RPackageCache::open(OpProgress &progress, bool locking)
       return _error->Error(_("The list of sources could not be read.\n\
 Go to the repository dialog to correct the problem."));
 
-   if(locking)
-      pkgMakeStatusCache(*_list, progress);
-   else
-      pkgMakeStatusCache(*_list, progress, 0, true);
+   if (! pkgMakeStatusCache(*_list, progress, locking))
+      // TODO: we could handle this case (no MMap could be created) as an error
+      ;
+   // TODO: why not re-use the returned MMap as _map?
 
    if (_error->PendingError())
       return _error->
