@@ -35,7 +35,7 @@ class Configuration;
 
 bool RWriteConfigFile(Configuration &Conf);
 
-bool RInitConfiguration(const string &confFileName);
+bool RInitConfiguration(string confFileName);
 
 bool RReadFilterData(Configuration &config);
 bool RFilterDataOutFile(ofstream &out);

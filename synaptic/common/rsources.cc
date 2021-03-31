@@ -56,7 +56,7 @@ SourcesList::SourceRecord *SourcesList::AddSourceNode(SourceRecord &rec)
    return newrec;
 }
 
-bool SourcesList::ReadSourcePart(const string &listpath)
+bool SourcesList::ReadSourcePart(string listpath)
 {
    //cout << "SourcesList::ReadSourcePart() "<< listpath  << endl;
    char buf[512];
@@ -168,7 +168,7 @@ bool SourcesList::ReadSourcePart(const string &listpath)
    return record_ok;
 }
 
-bool SourcesList::ReadSourceDir(const string &Dir)
+bool SourcesList::ReadSourceDir(string Dir)
 {
    //cout << "SourcesList::ReadSourceDir() " << Dir  << endl;
 
@@ -247,11 +247,11 @@ SourcesList::SourceRecord *SourcesList::AddEmptySource()
 }
 
 SourcesList::SourceRecord *SourcesList::AddSource(RecType Type,
-                                                   const string &VendorID, const string &URI,
-                                                   const string &Dist,
+                                                   string VendorID, string URI,
+                                                   string Dist,
                                                    string *Sections,
                                                    unsigned short count,
-                                                   const string &SourceFile)
+                                                   string SourceFile)
 {
    SourceRecord rec;
    rec.Type = Type;
@@ -339,7 +339,7 @@ bool SourcesList::UpdateSources()
    return true;
 }
 
-bool SourcesList::SourceRecord::SetType(const string &S)
+bool SourcesList::SourceRecord::SetType(string S)
 {
    if (S == "deb")
       Type |= Deb;
@@ -385,18 +385,16 @@ string SourcesList::SourceRecord::GetType()
    return "unknown";
 }
 
-bool SourcesList::SourceRecord::SetURI(const string &S)
+bool SourcesList::SourceRecord::SetURI(string S)
 {
    if (S.empty() == true)
       return false;
    if (S.find(':') == string::npos)
       return false;
 
-   std::string value = S;
-
-   value = SubstVar(value, "$(ARCH)", _config->Find("APT::Architecture"));
-   value = SubstVar(value, "$(VERSION)", _config->Find("APT::DistroVersion"));
-   URI = value;
+   S = SubstVar(S, "$(ARCH)", _config->Find("APT::Architecture"));
+   S = SubstVar(S, "$(VERSION)", _config->Find("APT::DistroVersion"));
+   URI = S;
 
    // append a / to the end if one is not already there
    if (URI[URI.size() - 1] != '/')
@@ -484,9 +482,9 @@ bool SourcesList::ReadVendors()
    return !_error->PendingError();
 }
 
-SourcesList::VendorRecord *SourcesList::AddVendor(const string &VendorID,
-                                                  const string &FingerPrint,
-                                                  const string &Description)
+SourcesList::VendorRecord *SourcesList::AddVendor(string VendorID,
+                                                  string FingerPrint,
+                                                  string Description)
 {
    VendorRecord rec;
    rec.VendorID = VendorID;

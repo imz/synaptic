@@ -46,7 +46,7 @@ class RGCDScanner:public pkgCdromStatus, public RGWindow {
 
    bool ChangeCdrom();
    bool AskCdromName(string &defaultName);
-   void Update(const string &text, int current);
+   void Update(string text, int current);
 
    bool run();
 

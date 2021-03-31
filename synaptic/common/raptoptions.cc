@@ -312,7 +312,7 @@ void RAPTOptions::setFlag(const char *key, bool value)
 }
 
 
-void RAPTOptions::setString(const char *key, const string &value)
+void RAPTOptions::setString(const char *key, string value)
 {
    _options[string(key)] = value;
 }

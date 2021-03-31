@@ -40,9 +40,9 @@
 
 // Let's all sing a song about apt-pkg's brokenness..
 
-pkgAcqFileSane::pkgAcqFileSane(pkgAcquire *Owner, const string &URI,
-			       const string &Description, const string &ShortDesc,
-			       const string &filename):
+pkgAcqFileSane::pkgAcqFileSane(pkgAcquire *Owner, string URI,
+			       string Description, string ShortDesc,
+			       string filename):
   Item(Owner)
 {
   Retries=_config->FindI("Acquire::Retries",0);
@@ -58,7 +58,7 @@ pkgAcqFileSane::pkgAcqFileSane(pkgAcquire *Owner, const string &URI,
 
 // Straight from acquire-item.cc
 /* Here we try other sources */
-void pkgAcqFileSane::Failed(const string &Message,pkgAcquire::MethodConfig *Cnf)
+void pkgAcqFileSane::Failed(string Message,pkgAcquire::MethodConfig *Cnf)
 {
   ErrorText = LookupTag(Message,"Message");
 
@@ -78,7 +78,7 @@ void pkgAcqFileSane::Failed(const string &Message,pkgAcquire::MethodConfig *Cnf)
 // Mostly copied from pkgAcqArchive.
 bool get_archive(pkgAcquire *Owner, pkgSourceList *Sources,
 		 pkgRecords *Recs, pkgCache::VerIterator const &Version,
-		 const string &directory, string &StoreFilename)
+		 string directory, string &StoreFilename)
 {
   pkgCache::VerFileIterator Vf=Version.FileList();
 

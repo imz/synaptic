@@ -182,7 +182,7 @@ void RGFetchProgress::cursorChanged(GtkTreeView *self, void *data)
    me->_cursorDirty=true;
 }
 
-void RGFetchProgress::setDescription(const string &mainText, const string &secondText)
+void RGFetchProgress::setDescription(string mainText, string secondText)
 {
    gtk_window_set_title(GTK_WINDOW(_win), mainText.c_str());
    gchar *str = g_strdup_printf("<big><b>%s</b></big> \n\n%s",
@@ -193,7 +193,7 @@ void RGFetchProgress::setDescription(const string &mainText, const string &secon
    g_free(str);
 }
 
-bool RGFetchProgress::MediaChange(const string &Media, const string &Drive)
+bool RGFetchProgress::MediaChange(string Media, string Drive)
 {
    gchar *msg;
 

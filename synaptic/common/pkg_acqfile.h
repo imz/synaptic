@@ -17,16 +17,16 @@ class pkgAcqFileSane:public pkgAcquire::Item
   unsigned int Retries;
 
 public:
-  pkgAcqFileSane(pkgAcquire *Owner, const string &URI,
-		 const string &Description, const string &ShortDesc, const string &filename);
+  pkgAcqFileSane(pkgAcquire *Owner, string URI,
+		 string Description, string ShortDesc, string filename);
 
-  virtual void Failed(const string &Message, pkgAcquire::MethodConfig *Cnf) override;
-  virtual string MD5Sum() override {return Md5Hash;}
-  virtual string DescURI() override {return Desc.URI;}
+  void Failed(string Message, pkgAcquire::MethodConfig *Cnf);
+  string MD5Sum() {return Md5Hash;}
+  string DescURI() {return Desc.URI;}
   virtual ~pkgAcqFileSane() {}
 };
 
 // Hack around the broken pkgAcqArchive.
 bool get_archive(pkgAcquire *Owner, pkgSourceList *Sources,
 		 pkgRecords *Recs, pkgCache::VerIterator const &Version,
-		 const std::string &directory, std::string &StoreFilename);
+		 std::string directory, std::string &StoreFilename);

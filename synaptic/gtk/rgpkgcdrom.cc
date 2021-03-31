@@ -45,13 +45,13 @@ class RGDiscName : public RGGladeWindow
    static void onCancelClicked(GtkWidget *self, void *data);
 
  public:
-   RGDiscName(RGWindow *wwin, const string &defaultName);
+   RGDiscName(RGWindow *wwin, const string defaultName);
 
    bool run(string &name);
 };
 
 
-void RGCDScanner::Update(const string &text, int current)
+void RGCDScanner::Update(string text, int current)
 {
    if(text.size() > 0)
       gtk_label_set_text(GTK_LABEL(_label), text.c_str());
@@ -116,7 +116,7 @@ bool RGCDScanner::run()
 
 
 
-RGDiscName::RGDiscName(RGWindow *wwin, const string &defaultName)
+RGDiscName::RGDiscName(RGWindow *wwin, const string defaultName)
 : RGGladeWindow(wwin, "disc_name")
 {
    setTitle(_("Disc Label"));

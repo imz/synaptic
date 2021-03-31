@@ -13,6 +13,6 @@
 
 using namespace std;
 
-string trans_section(const string &sec);
+string trans_section(string sec);
 
 #endif

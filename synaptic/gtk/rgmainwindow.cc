@@ -100,7 +100,7 @@ enum { DEP_NAME_COLUMN,         /* text */
 };                              /* additional info (install 
                                    not installed) as text */
 
-void RGMainWindow::changeView(int view, const string &subView)
+void RGMainWindow::changeView(int view, string subView)
 {
    if(_config->FindB("Debug::Synaptic::View",false))
       ioprintf(clog, "RGMainWindow::changeView(): view '%i' subView '%s'\n", 
@@ -654,7 +654,7 @@ void RGMainWindow::pkgAction(RGPkgAction action)
    setInterfaceLocked(FALSE);
 }
 
-bool RGMainWindow::checkForFailedInst(const vector<RPackage *> &instPkgs)
+bool RGMainWindow::checkForFailedInst(vector<RPackage *> instPkgs)
 {
    string failedReason;
    bool failed = false;
@@ -688,7 +688,7 @@ bool RGMainWindow::checkForFailedInst(const vector<RPackage *> &instPkgs)
    return failed;
 }
 
-RGMainWindow::RGMainWindow(RPackageLister *packLister, const string &name)
+RGMainWindow::RGMainWindow(RPackageLister *packLister, string name)
    : RGGladeWindow(NULL, name), _lister(packLister), _pkgList(0), 
      _treeView(0), _tasksWin(0), _iconLegendPanel(0), _pkgDetails(0),
      _logView(0), _installProgress(0), _fetchProgress(0)
@@ -2983,7 +2983,7 @@ void RGMainWindow::cbMenuPinClicked(GtkWidget *self, void *data)
 void RGMainWindow::cbTreeviewPopupMenu(GtkWidget *treeview,
                                        GdkEventButton *event,
                                        RGMainWindow *me,
-                                       const vector<RPackage *> &selected_pkgs)
+                                       vector<RPackage *> selected_pkgs)
 {
    // Nothing selected, shouldn't happen, but we play safely.
    if (selected_pkgs.size() == 0)
@@ -3173,7 +3173,7 @@ GtkWidget* RGMainWindow::buildWeakDependsMenu(RPackage *pkg,
       return NULL;
 }
 
-void RGMainWindow::selectToInstall(const vector<string> &packagenames)
+void RGMainWindow::selectToInstall(vector<string> packagenames)
 {
    RGMainWindow *me = this;
 

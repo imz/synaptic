@@ -47,7 +47,7 @@ class RCDScanProgress {
       _total = total;
    };
 
-   virtual void update(const string &text, int current) = 0;
+   virtual void update(string text, int current) = 0;
 };
 
 class RCDScanner {
@@ -101,7 +101,7 @@ class RCDScanner {
    void unmount();
 
    string getDiscName();
-   bool setDiscName(const string &name);
+   bool setDiscName(string name);
 
    void countLists(int &pkgLists, int &srcLists);
 

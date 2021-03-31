@@ -37,7 +37,7 @@
 
 using namespace std;
 
-bool RPackageView::setSelected(const string &name)
+bool RPackageView::setSelected(string name)
 {
    map<string, vector<RPackage *> >::iterator I = _view.find(name);
    if (I != _view.end()) {
@@ -229,8 +229,8 @@ void RPackageViewSearch::addPackage(RPackage *pkg)
    //_view[searchString].push_back(NULL);
 }
 
-int RPackageViewSearch::setSearch(const string &aSearchName, int type, 
-				  const string &searchString)
+int RPackageViewSearch::setSearch(string aSearchName, int type, 
+				  string searchString)
 {
    found = 0;
    searchType = type;
@@ -407,7 +407,7 @@ void RPackageViewFilter::unregisterFilter(RFilter *filter)
    }
 }
 
-RFilter* RPackageViewFilter::findFilter(const string &name)
+RFilter* RPackageViewFilter::findFilter(string name)
 {
    RFilter *filter=NULL;
    // find filter

@@ -72,7 +72,7 @@
 static int descrBufferSize = 4096;
 static char *descrBuffer = new char[descrBufferSize];
 
-static char *parseDescription(const string &descr);
+static char *parseDescription(string descr);
 
 
 RPackage::RPackage(RPackageLister *lister, pkgDepCache *depcache,
@@ -991,7 +991,7 @@ vector<pair<string, string> > RPackage::getAvailableVersions()
 }
 
 
-bool RPackage::setVersion(const string &verTag)
+bool RPackage::setVersion(string verTag)
 {
    pkgVersionMatch Match(verTag, pkgVersionMatch::Version);
    pkgCache::VerIterator Ver = Match.Find(*_package);
@@ -1140,7 +1140,7 @@ static char *rpmParser(string descr)
    return descrBuffer;
 }
 
-static char *stripWsParser(const string &descr)
+static char *stripWsParser(string descr)
 {
    const char *end;
    const char *p;
@@ -1186,7 +1186,7 @@ static char *stripWsParser(const string &descr)
 }
 
 
-static char *parseDescription(const string &descr)
+static char *parseDescription(string descr)
 {
 
    if (descr.size() + 1 > size_t(descrBufferSize)) {

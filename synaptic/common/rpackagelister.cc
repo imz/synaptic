@@ -148,7 +148,7 @@ vector<string> RPackageLister::getSubViews()
    return _selectedView->getSubViews();
 }
 
-bool RPackageLister::setSubView(const string &newSubView)
+bool RPackageLister::setSubView(string newSubView)
 {
    if(_config->FindB("Debug::Synaptic::View",false))
       ioprintf(clog, "RPackageLister::setSubView(): newSubView '%s'\n", 
@@ -168,7 +168,7 @@ bool RPackageLister::setSubView(const string &newSubView)
    return true;
 }
 
-static string getServerErrorMessage(const string &errm)
+static string getServerErrorMessage(string errm)
 {
    string msg;
    string::size_type pos = errm.find("server said");
@@ -445,7 +445,7 @@ RPackage *RPackageLister::getPackage(pkgCache::PkgIterator &iter)
    return NULL;
 }
 
-RPackage *RPackageLister::getPackage(const string &name)
+RPackage *RPackageLister::getPackage(string name)
 {
    pkgCache::PkgIterator pkg = _cache->deps()->FindPkg(name);
    if (pkg.end() == false)
@@ -1834,7 +1834,7 @@ bool RPackageLister::readSelections(istream &in)
    return true;
 }
 
-bool RPackageLister::addArchiveToCache(const string &archive, string &pkgname)
+bool RPackageLister::addArchiveToCache(string archive, string &pkgname)
 {
 #ifndef HAVE_RPM
    //cout << "addArchiveToCache() " << archive << endl;

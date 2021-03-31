@@ -66,7 +66,7 @@ class RPackageView {
 
    bool hasSelection() { return _hasSelection; };
    string getSelected() { return _selectedName; };
-   bool setSelected(const string &name);
+   bool setSelected(string name);
    void showAll() { 
       _selectedView = _all; 
       _hasSelection = false;
@@ -95,21 +95,21 @@ class RPackageViewSections : public RPackageView {
  public:
    RPackageViewSections(vector<RPackage *> &allPkgs) : RPackageView(allPkgs) {};
 
-   virtual string getName() override {
+   string getName() {
       return _("Sections");
    };
 
-   virtual void addPackage(RPackage *package) override;
+   void addPackage(RPackage *package);
 };
 
 class RPackageViewAlphabetic : public RPackageView {
  public:
    RPackageViewAlphabetic(vector<RPackage *> &allPkgs) : RPackageView(allPkgs) {};
-   virtual string getName() override {
+   string getName() {
       return _("Alphabetic");
    };
 
-   virtual void addPackage(RPackage *package) override {
+   void addPackage(RPackage *package) {
       char letter[2] = { ' ', '\0' };
       letter[0] = toupper(package->name()[0]);
       _view[letter].push_back(package);
@@ -119,11 +119,11 @@ class RPackageViewAlphabetic : public RPackageView {
 class RPackageViewOrigin : public RPackageView {
  public:
    RPackageViewOrigin(vector<RPackage *> &allPkgs) : RPackageView(allPkgs) {};
-   virtual string getName() override {
+   string getName() {
       return _("Origin");
    };
 
-   virtual void addPackage(RPackage *package) override;
+   void addPackage(RPackage *package);
 };
 
 class RPackageViewStatus:public RPackageView {
@@ -135,11 +135,11 @@ class RPackageViewStatus:public RPackageView {
  public:
    RPackageViewStatus(vector<RPackage *> &allPkgs);
 
-   virtual string getName() override {
+   string getName() {
       return _("Status");
    };
 
-   virtual void addPackage(RPackage *package) override;
+   void addPackage(RPackage *package);
 };
 
 class RPackageViewSearch : public RPackageView {
@@ -152,13 +152,13 @@ class RPackageViewSearch : public RPackageView {
    RPackageViewSearch(vector<RPackage *> &allPkgs) 
       : RPackageView(allPkgs), found(0) {};
 
-   int setSearch(const string &searchName, int type, const string &searchString);
+   int setSearch(string searchName, int type, string searchString);
 
-   virtual string getName() override {
+   string getName() {
       return _("Search History");
    };
 
-   virtual void addPackage(RPackage *package) override;
+   void addPackage(RPackage *package);
 
    // no-op
    virtual void refresh() {};
@@ -175,14 +175,14 @@ class RPackageViewFilter : public RPackageView {
    void restoreFilters();
    // called after the filtereditor was run
    void refreshFilters();
-   virtual void refresh() override;
+   void refresh();
 
    bool registerFilter(RFilter *filter);
    void unregisterFilter(RFilter *filter);
 
    void makePresetFilters();
 
-   RFilter* findFilter(const string &name);
+   RFilter* findFilter(string name);
    unsigned int nrOfFilters() { return _filterL.size(); };
    RFilter *findFilter(unsigned int index) {
       if (index > _filterL.size())
@@ -200,16 +200,16 @@ class RPackageViewFilter : public RPackageView {
    RPackageViewFilter(vector<RPackage *> &allPkgs);
 
    // build packages list on "demand"
-   virtual iterator begin() override;
+   virtual iterator begin();
 
    // we never need to clear because we build the view "on-demand"
-   virtual void clear() override {clearSelection();};
+   virtual void clear() {clearSelection();};
 
-   virtual string getName() override {
+   string getName() {
       return _("Custom");
    };
 
-   virtual void addPackage(RPackage *package) override;
+   void addPackage(RPackage *package);
 };
 
 

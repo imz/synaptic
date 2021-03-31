@@ -51,35 +51,31 @@ struct ItemDesc
 class SwigAcquireStatus : public pkgAcquireStatus 
 {
  protected:
-   virtual bool Pulse(pkgAcquire *Owner) override {
+   virtual bool Pulse(pkgAcquire *Owner) {
       bool result = pkgAcquireStatus::Pulse(Owner);
       UpdatePulse(FetchedBytes, CurrentCPS, CurrentItems);
       return result;
    };
  public:
    // Called by items when they have finished a real download
-   virtual void Fetched(unsigned long long Size,unsigned long long ResumePoint) override {
+   virtual void Fetched(unsigned long Size,unsigned long ResumePoint) {
       pkgAcquireStatus::Fetched(Size, ResumePoint);
    };
    
    // Called to change media
-   virtual bool MediaChange(const string &Media, const string &Drive) override = 0;
+   virtual bool MediaChange(string Media,string Drive) = 0;
    
    // Each of these is called by the workers when an event occures
-#if 0
-   virtual void IMSHit(ItemDesc &/*Itm*/) override {};
-   virtual void Fetch(ItemDesc &/*Itm*/) override {};
-   virtual void Done(ItemDesc &/*Itm*/) override {};
-   virtual void Fail(ItemDesc &/*Itm*/) override {};
-#endif
+   virtual void IMSHit(ItemDesc &/*Itm*/) {};
+   virtual void Fetch(ItemDesc &/*Itm*/) {};
+   virtual void Done(ItemDesc &/*Itm*/) {};
+   virtual void Fail(ItemDesc &/*Itm*/) {};
    virtual void UpdatePulse(double FetchedBytes, double CurrentCPS, unsigned long CurrentItems) {};
-#if 0
-   virtual void Start() override {
+   virtual void Start() {
       pkgAcquireStatus::Start();
    };
-   virtual void Stop() override {
+   virtual void Stop() {
       pkgAcquireStatus::Stop();
    };
-#endif
 
 };

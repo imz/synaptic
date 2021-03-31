@@ -51,7 +51,7 @@ static string ConfigFileDir;
 // #endif
 
 static void dumpToFile(const Configuration::Item *Top, ostream &out,
-                       const string &pad)
+                       string pad)
 {
    while (Top) {
       out << pad << Top->Tag << " \"" << Top->Value << "\"";
@@ -192,7 +192,7 @@ string RLogDir()
 }
 
 
-bool RInitConfiguration(const string &confFileName)
+bool RInitConfiguration(string confFileName)
 {
    string configDir;
 
