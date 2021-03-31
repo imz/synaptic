@@ -88,7 +88,7 @@ class RCacheActorRecommends:public RCacheActor {
 
    void setLanguageCache();
 
-   inline bool actOnPkg(const string &name, int Action) {
+   inline bool actOnPkg(string name, int Action) {
       RPackage *Pkg = _lister->getPackage(name);
       if (Pkg != NULL) {
          switch (Action) {
@@ -114,7 +114,7 @@ class RCacheActorRecommends:public RCacheActor {
 
    virtual void notifyCachePostChange();
 
-   RCacheActorRecommends(RPackageLister *lister, const string &FileName);
+   RCacheActorRecommends(RPackageLister *lister, string FileName);
    virtual ~RCacheActorRecommends();
 };
 

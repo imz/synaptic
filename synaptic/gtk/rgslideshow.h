@@ -43,7 +43,7 @@ class RGSlideShow {
       _totalSteps = totalSteps;
    };
 
-   RGSlideShow(GtkImage * image, const string &imgPath);
+   RGSlideShow(GtkImage * image, string imgPath);
 };
 
 #endif

@@ -25,31 +25,31 @@ class IndexCopy {
 
    pkgTagSection *Section;
 
-   string ChopDirs(const string &Path, unsigned int Depth);
-   bool ReconstructPrefix(string &Prefix, const string &OrigPath, const string &CD,
-                          const string &File);
-   bool ReconstructChop(unsigned long &Chop, const string &Dir, const string &File);
-   void ConvertToSourceList(const string &CD, string &Path);
-   bool GrabFirst(const string &Path, string &To, unsigned int Depth);
-   virtual bool GetFile(string &Filename, unsigned long long &Size) = 0;
-   virtual bool RewriteEntry(FILE *Target, const string &File) = 0;
+   string ChopDirs(string Path, unsigned int Depth);
+   bool ReconstructPrefix(string &Prefix, string OrigPath, string CD,
+                          string File);
+   bool ReconstructChop(unsigned long &Chop, string Dir, string File);
+   void ConvertToSourceList(string CD, string &Path);
+   bool GrabFirst(string Path, string &To, unsigned int Depth);
+   virtual bool GetFile(string &Filename, unsigned long &Size) = 0;
+   virtual bool RewriteEntry(FILE *Target, string File) = 0;
    virtual const char *GetFileName() = 0;
    virtual const char *Type() = 0;
 
  public:
 
-   bool CopyPackages(const string &CDROM, const string &Name, vector<string> &List);
+   bool CopyPackages(string CDROM, string Name, vector<string> &List);
 };
 
 class PackageCopy:public IndexCopy {
  protected:
 
-   virtual bool GetFile(string &Filename, unsigned long long &Size) override;
-   virtual bool RewriteEntry(FILE *Target, const string &File) override;
-   virtual const char *GetFileName() override {
+   virtual bool GetFile(string &Filename, unsigned long &Size);
+   virtual bool RewriteEntry(FILE *Target, string File);
+   virtual const char *GetFileName() {
       return "Packages";
    };
-   virtual const char *Type() override {
+   virtual const char *Type() {
       return "Package";
    };
 
@@ -59,12 +59,12 @@ class PackageCopy:public IndexCopy {
 class SourceCopy:public IndexCopy {
  protected:
 
-   virtual bool GetFile(string &Filename, unsigned long long &Size) override;
-   virtual bool RewriteEntry(FILE *Target, const string &File) override;
-   virtual const char *GetFileName() override {
+   virtual bool GetFile(string &Filename, unsigned long &Size);
+   virtual bool RewriteEntry(FILE *Target, string File);
+   virtual const char *GetFileName() {
       return "Sources";
    };
-   virtual const char *Type() override {
+   virtual const char *Type() {
       return "Source";
    };
 

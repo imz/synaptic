@@ -565,14 +565,14 @@ void RGFilterManagerWindow::setStatusFilter(RStatusPackageFilter & f)
 bool RGFilterManagerWindow::setPatternRow(int row,
                                           bool exclude,
                                           RPatternPackageFilter::DepType type,
-                                          const string &pattern)
+                                          string pattern)
 {
    GtkTreeIter iter;
-   const char *array[3];
+   char *array[3];
 
    array[0] = ActOptions[exclude ? 1 : 0];
    array[1] = DepOptions[(int)type];
-   array[2] = pattern.c_str();
+   array[2] = (char *)pattern.c_str();
 
    if (row < 0) {
       gtk_list_store_append(GTK_LIST_STORE(_patternListStore), &iter);

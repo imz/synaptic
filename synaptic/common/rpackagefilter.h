@@ -55,8 +55,8 @@ class RPackageFilter {
    virtual bool filter(RPackage *pkg) = 0;
    virtual void reset() = 0;
 
-   virtual bool read(Configuration &conf, const string &key) = 0;
-   virtual bool write(ofstream &out, const string &pad) = 0;
+   virtual bool read(Configuration &conf, string key) = 0;
+   virtual bool write(ofstream &out, string pad) = 0;
 
    RPackageFilter() {};
    virtual ~RPackageFilter() {};
@@ -82,19 +82,19 @@ class RSectionPackageFilter : public RPackageFilter {
       _inclusive = false;
    };
 
-   inline virtual const char *type() override { return RPFSection; };
+   inline virtual const char *type() { return RPFSection; };
 
    void setInclusive(bool flag) { _inclusive = flag; };
    bool inclusive();
 
-   inline void addSection(const string &group) { _groups.push_back(group); };
+   inline void addSection(string group) { _groups.push_back(group); };
    int count();
    string section(int index);
    void clear();
 
-   virtual bool filter(RPackage *pkg) override;
-   virtual bool read(Configuration &conf, const string &key) override;
-   virtual bool write(ofstream &out, const string &pad) override;
+   virtual bool filter(RPackage *pkg);
+   virtual bool read(Configuration &conf, string key);
+   virtual bool write(ofstream &out, string pad);
 };
 
 
@@ -130,16 +130,16 @@ class RPatternPackageFilter : public RPackageFilter {
    
    bool and_mode; // patterns are applied in "AND" mode if true, "OR" if false
 
-   inline bool filterName(const Pattern &pat, RPackage *pkg);
-   inline bool filterVersion(const Pattern &pat, RPackage *pkg);
-   inline bool filterDescription(const Pattern &pat, RPackage *pkg);
-   inline bool filterMaintainer(const Pattern &pat, RPackage *pkg);
-   inline bool filterDepends(const Pattern &pat, RPackage *pkg, 
+   inline bool filterName(Pattern pat, RPackage *pkg);
+   inline bool filterVersion(Pattern pat, RPackage *pkg);
+   inline bool filterDescription(Pattern pat, RPackage *pkg);
+   inline bool filterMaintainer(Pattern pat, RPackage *pkg);
+   inline bool filterDepends(Pattern pat, RPackage *pkg, 
 			     pkgCache::Dep::DepType filterType);
-   inline bool filterProvides(const Pattern &pat, RPackage *pkg);
-   inline bool filterRDepends(const Pattern &pat, RPackage *pkg);
-   inline bool filterOrigin(const Pattern &pat, RPackage *pkg);
-   inline bool filterComponent(const Pattern &pat, RPackage *pkg);
+   inline bool filterProvides(Pattern pat, RPackage *pkg);
+   inline bool filterRDepends(Pattern pat, RPackage *pkg);
+   inline bool filterOrigin(Pattern pat, RPackage *pkg);
+   inline bool filterComponent(Pattern pat, RPackage *pkg);
 
  public:
 
@@ -149,11 +149,11 @@ class RPatternPackageFilter : public RPackageFilter {
    RPatternPackageFilter(RPatternPackageFilter &f);
    virtual ~RPatternPackageFilter();
 
-   inline virtual void reset() override { clear(); };
+   inline virtual void reset() { clear(); };
 
-   inline virtual const char *type() override { return RPFPattern; };
+   inline virtual const char *type() { return RPFPattern; };
 
-   void addPattern(DepType type, const string &pattern, bool exclusive);
+   void addPattern(DepType type, string pattern, bool exclusive);
    inline int count() { return _patterns.size(); };
    inline void getPattern(int index, DepType &type, string &pattern,
                           bool &exclusive) {
@@ -165,9 +165,9 @@ class RPatternPackageFilter : public RPackageFilter {
    bool getAndMode() { return and_mode; };
    void setAndMode(bool b) { and_mode=b; };
 
-   virtual bool filter(RPackage *pkg) override;
-   virtual bool read(Configuration &conf, const string &key) override;
-   virtual bool write(ofstream &out, const string &pad);
+   virtual bool filter(RPackage *pkg);
+   virtual bool read(Configuration &conf, string key);
+   virtual bool write(ofstream &out, string pad);
 };
 
 
@@ -199,16 +199,16 @@ class RStatusPackageFilter : public RPackageFilter {
 
    RStatusPackageFilter() : _status(~0)
    {};
-   inline virtual void reset() override { _status = ~0; };
+   inline virtual void reset() { _status = ~0; };
 
-   inline virtual const char *type() override { return RPFStatus; };
+   inline virtual const char *type() { return RPFStatus; };
 
    inline void setStatus(int status) { _status = status; };
    inline int status() { return _status; };
 
-   virtual bool filter(RPackage *pkg) override;
-   virtual bool read(Configuration &conf, const string &key) override;
-   virtual bool write(ofstream &out, const string &pad) override;
+   virtual bool filter(RPackage *pkg);
+   virtual bool read(Configuration &conf, string key);
+   virtual bool write(ofstream &out, string pad);
 };
 
 
@@ -220,13 +220,13 @@ class RPriorityPackageFilter:public RPackageFilter {
 
    RPriorityPackageFilter()  {};
 
-   inline virtual void reset() override {};
+   inline virtual void reset() {};
 
-   inline virtual const char *type() override { return RPFPriority; };
+   inline virtual const char *type() { return RPFPriority; };
 
-   virtual bool filter(RPackage *pkg) override;
-   virtual bool read(Configuration &conf, const string &key) override;
-   virtual bool write(ofstream &out, const string &pad) override;
+   virtual bool filter(RPackage *pkg);
+   virtual bool read(Configuration &conf, string key);
+   virtual bool write(ofstream &out, string pad);
 };
 
 
@@ -242,20 +242,20 @@ class RReducedViewPackageFilter : public RPackageFilter {
    vector<string> _hide_wildcard;
    vector<regex_t *> _hide_regex;
 
-   void addFile(const string &FileName);
+   void addFile(string FileName);
 
    public:
 
    RReducedViewPackageFilter() : _enabled(false) {};
    ~RReducedViewPackageFilter();
 
-   inline virtual void reset() override { _hide.clear(); };
+   inline virtual void reset() { _hide.clear(); };
 
-   inline virtual const char *type() override { return RPFReducedView; };
+   inline virtual const char *type() { return RPFReducedView; };
 
-   virtual bool filter(RPackage *pkg) override;
-   virtual bool read(Configuration &conf, const string &key) override;
-   virtual bool write(ofstream &out, const string &pad) override;
+   virtual bool filter(RPackage *pkg);
+   virtual bool read(Configuration &conf, string key);
+   virtual bool write(ofstream &out, string pad);
 
    void enable() { _enabled = true; };
    void disable() { _enabled = false; };
@@ -270,10 +270,10 @@ struct RFilter {
           priority(), reducedview(), preset()
    {};
 
-   void setName(const string &name);
+   void setName(string name);
    string getName();
 
-   bool read(Configuration &conf, const string &key);
+   bool read(Configuration &conf, string key);
    bool write(ofstream &out);
    bool apply(RPackage *package);
    void reset();

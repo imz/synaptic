@@ -51,7 +51,7 @@ void RCacheActor::notifyCachePostChange()
 
 
 RCacheActorRecommends::RCacheActorRecommends(RPackageLister *lister,
-                                             const string &FileName)
+                                             string FileName)
 : RCacheActor(lister)
 {
    FileFd F(FileName, FileFd::ReadOnly);

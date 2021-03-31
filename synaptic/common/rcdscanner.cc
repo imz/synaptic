@@ -53,7 +53,7 @@ using namespace std;
 // ---------------------------------------------------------------------
 /* This takes the list of source list expressed entires and collects
    similar ones to form a single entry for each dist */
-void ReduceSourcelist(const string &CD, vector<string> &List)
+void ReduceSourcelist(string CD, vector<string> &List)
 {
    sort(List.begin(), List.end());
 
@@ -364,7 +364,7 @@ string RCDScanner::getDiscName()
    return name;
 }
 
-bool RCDScanner::setDiscName(const string &name)
+bool RCDScanner::setDiscName(string name)
 {
    if (name.empty() == true ||
        name.find('"') != string::npos ||
@@ -474,7 +474,7 @@ bool DropBinaryArch(vector<string> &List)
 /* Paths are scored based on how close they come to what I consider
    normal. That is ones that have 'dist' 'stable' 'frozen' will score
    higher than ones without. */
-int Score(const string &Path)
+int Score(string Path)
 {
    int Res = 0;
 #ifdef HAVE_RPM

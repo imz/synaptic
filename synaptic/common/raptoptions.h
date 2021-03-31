@@ -68,7 +68,7 @@ class RAPTOptions {
    string getString(const char *key);
 
    void setFlag(const char *key, bool value);
-   void setString(const char *key, const string &value);
+   void setString(const char *key, string value);
 
  private:
    map<string, packageOptions> _packageOptions;

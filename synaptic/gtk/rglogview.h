@@ -48,12 +48,12 @@ class RGLogView : public RGGladeWindow {
 
    // set new logbuffer text
    void clearLogBuf();
-   void appendLogBuf(const string &text);
+   void appendLogBuf(string text);
 
  public:
    RGLogView(RGWindow *parent);
 
-   virtual void show() override;
+   virtual void show();
    void readLogs();
 
    virtual ~RGLogView() {};
