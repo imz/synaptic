@@ -404,72 +404,51 @@ gtk_pkg_list_get_value(GtkTreeModel *tree_model,
       return;
    }
 
-   const gchar *str;
    switch (column) {
       case NAME_COLUMN:
-         str = utf8(pkg->name());
-         g_value_set_string(value, str);
+         g_value_set_string(value, utf8(pkg->name()));
          break;
       case PKG_SIZE_COLUMN:
          if (pkg->installedVersion()) {
-            str = SizeToStr(pkg->installedSize()).c_str();
-            g_value_set_string(value, str);
+            g_value_set_string(value, SizeToStr(pkg->installedSize()).c_str());
          }
          break;
       case PKG_DOWNLOAD_SIZE_COLUMN:
-	 str = SizeToStr(pkg->availablePackageSize()).c_str();
-	 g_value_set_string(value, str);
+         g_value_set_string(value, SizeToStr(pkg->availablePackageSize()).c_str());
          break;
       case SECTION_COLUMN:
-	 str = pkg->section();
-	 if(str != NULL)
-	    g_value_set_string(value, str);
-	 break;
+       {
+          const gchar * const str = pkg->section();
+          if(str != NULL)
+             g_value_set_string(value, str);
+          break;
+       }
       case COMPONENT_COLUMN:
-	 str = pkg->component().c_str();
-	 if(str)
-	    g_value_set_string(value, str);
-	 break;
+         g_value_set_string(value, pkg->component().c_str());
+         break;
       case INSTALLED_VERSION_COLUMN:
-         str = pkg->installedVersion();
-         g_value_set_string(value, str);
+         g_value_set_string(value, pkg->installedVersion());
          break;
       case AVAILABLE_VERSION_COLUMN:
-         str = pkg->availableVersion();
-         g_value_set_string(value, str);
+         g_value_set_string(value, pkg->availableVersion());
          break;
       case DESCR_COLUMN:
-         str = utf8(pkg->summary());
-         g_value_set_string(value, str);
+         g_value_set_string(value, utf8(pkg->summary()));
          break;
       case PKG_COLUMN:
          g_value_set_pointer(value, pkg);
          break;
       case COLOR_COLUMN:
-       {
-	  if(_config->FindB("Synaptic::UseStatusColors", TRUE) == FALSE) 
-	     return;
-          GdkColor *bg;
-          bg = RGPackageStatus::pkgStatus.getBgColor(pkg);
-          g_value_set_boxed(value, bg);
-          break;
-       }
+         if(_config->FindB("Synaptic::UseStatusColors", TRUE) == FALSE)
+            return;
+         g_value_set_boxed(value, RGPackageStatus::pkgStatus.getBgColor(pkg));
+         break;
       case SUPPORTED_COLUMN:
-       {
-          if (pkg == NULL)
-             return;
-          GdkPixbuf *pix;
-          pix = RGPackageStatus::pkgStatus.getSupportedPix(pkg);
-          g_value_set_object(value, pix);
-          break;
-       }
+         g_value_set_object(value, RGPackageStatus::pkgStatus.getSupportedPix(pkg));
+         break;
       case PIXMAP_COLUMN:
-       {
-          GdkPixbuf *pix;
-          pix = RGPackageStatus::pkgStatus.getPixbuf(pkg);
-          g_value_set_object(value, pix);
-          break;
-       }
+         g_value_set_object(value, RGPackageStatus::pkgStatus.getPixbuf(pkg));
+         break;
    }
 }
 
