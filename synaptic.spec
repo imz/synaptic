@@ -4,7 +4,7 @@
 
 Name: synaptic
 Version: 0.58
-Release: alt23
+Release: alt24
 
 Summary: Graphical front-end for APT
 Summary(ru_RU.UTF-8): Графическая оболочка для APT
@@ -94,6 +94,15 @@ install -p -m644 %SOURCE2 %buildroot%_sysconfdir/apt/apt.conf.d/%name.conf
 %exclude %_datadir/pixmaps/%name.png
 
 %changelog
+* Tue May 11 2021 Ivan Zakharyaschev <imz@altlinux.org> 0.58-alt24
+- Fixed a use-after-free bug (appearing as garbage being shown in the size
+  columns, notably after recompilation with gcc10). (ALT#40010)
+- Unset Synaptic::supported-text in the packaged configuration file. (That's
+  the straight way to get "Package is supported" translated in the UI rather
+  than the previous hack in the code.)
+- Included the sr@latin translation in the package.
+  (It got excluded before because of an outdated sr@Latn name.)
+
 * Tue Jul 30 2019 Aleksei Nikiforov <darktemplar@altlinux.org> 0.58-alt23
 - Rebuilt with new Apt.
 
