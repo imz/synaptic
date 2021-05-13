@@ -74,15 +74,27 @@ SAVE_LIBS="$LIBS"
 SAVE_CPPFLAGS="$CPPFLAGS"
 
 RPM_HDRS=""
-LIBS="$SAVE_LIBS -lrpm -lrpmio"
+LIBS="$SAVE_LIBS -lrpmio -lrpmdb -lpopt"
 CPPFLAGS="$SAVE_CPPFLAGS -I/usr/include/rpm"
 AC_CHECK_HEADER(rpm/rpmlib.h,
       [AC_CHECK_LIB(rpm,rpmdbInitIterator,
         [AC_DEFINE(HAVE_RPM, 1, [whether RPM is present]) 
-         RPM_LIBS="-lrpm -lrpmio"
+         RPM_LIBS="-lrpm -lrpmio -lrpmdb -lpopt"
          SAVE_CPPFLAGS="$SAVE_CPPFLAGS -I/usr/include/rpm"
 	 RPM_HDRS="-I/usr/include/rpm"
          rpm_version="4"])])
+
+if test $rpm_version = "none"; then
+LIBS="$SAVE_LIBS -lpopt"
+CPPFLAGS="$SAVE_CPPFLAGS -I/usr/include/rpm"
+AC_CHECK_HEADER(rpm/rpmlib.h,
+      [AC_CHECK_LIB(rpm,rpmdbOpen,
+        [AC_DEFINE(HAVE_RPM, 1, [wheter RPM is present]) 
+         RPM_LIBS="-lrpm -lpopt"
+         SAVE_CPPFLAGS="$SAVE_CPPFLAGS -I/usr/include/rpm"
+	 RPM_HDRS="-I/usr/include/rpm"
+         rpm_version="3"])])
+fi
 
 AC_SUBST(RPM_LIBS)
 AC_SUBST(RPM_HDRS)
