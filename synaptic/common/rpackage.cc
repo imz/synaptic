@@ -747,7 +747,7 @@ void RPackage::setKeep()
 
 void RPackage::setInstall()
 {
-   _depcache->MarkInstall(*_package, pkgDepCache::AutoMarkFlag::Manual, true);
+   _depcache->MarkInstall(*_package, true);
    pkgDepCache::StateCache & State = (*_depcache)[*_package];
 
    // FIXME: can't we get rid of it here?

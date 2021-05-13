@@ -1051,10 +1051,10 @@ void RPackageLister::restoreState(RPackageLister::pkgState &state)
 
       if (oldflags != flags) {
          if (oldflags & RPackage::FReInstall) {
-            deps->MarkInstall(*(pkg->package()), pkgDepCache::AutoMarkFlag::DontChange, true);
+            deps->MarkInstall(*(pkg->package()), true);
             deps->SetReInstall(*(pkg->package()), false);
          } else if (oldflags & RPackage::FInstall) {
-            deps->MarkInstall(*(pkg->package()), pkgDepCache::AutoMarkFlag::Manual, true);
+            deps->MarkInstall(*(pkg->package()), true);
          } else if (oldflags & RPackage::FRemove) {
             deps->MarkDelete(*(pkg->package()), oldflags & RPackage::FPurge);
          } else if (oldflags & RPackage::FKeep) {
@@ -1807,9 +1807,9 @@ bool RPackageLister::readSelections(istream &in)
 		  if(_config->FindB("Volatile::SetSelectionDoReInstall",false))
 		     Cache.SetReInstall(Pkg, true);
 		  if(_config->FindB("Volatile::SetSelectionsNoFix",false))
-		     Cache.MarkInstall(Pkg, pkgDepCache::AutoMarkFlag::Manual, false);
+		     Cache.MarkInstall(Pkg, false);
 		  else
-		     Cache.MarkInstall(Pkg, pkgDepCache::AutoMarkFlag::Manual, true);
+		     Cache.MarkInstall(Pkg, true);
                   break;
 
                case ACTION_UNINSTALL:
