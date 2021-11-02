@@ -1,0 +1,10 @@
+--- configure.in~	2021-11-01 18:11:47.096632699 +0300
++++ configure.in	2021-11-01 18:18:09.235664824 +0300
+@@ -201,6 +201,7 @@
+ help/Makefile
+ help/C/Makefile
+ help/es/Makefile
++help/ru/Makefile
+ help/sv/Makefile
+ doc/Makefile
+ doc/html/Makefile
