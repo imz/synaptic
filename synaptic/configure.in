@@ -201,6 +201,7 @@ po/Makefile.in
 help/Makefile
 help/C/Makefile
 help/es/Makefile
+help/ru/Makefile
 help/sv/Makefile
 doc/Makefile
 doc/html/Makefile
