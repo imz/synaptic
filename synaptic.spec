@@ -1,11 +1,12 @@
 %define _unpackaged_files_terminate_build 1
+%define _stripped_files_terminate_build 1
+%set_verify_elf_method strict
 
 %def_enable autotools
 
 Name: synaptic
 Version: 0.58
-Release: alt26.1
-
+Release: alt27
 Summary: Graphical front-end for APT
 Summary(ru_RU.UTF-8): Графическая оболочка для APT
 Group: System/Configuration/Packaging
@@ -17,11 +18,7 @@ Source: %name-%version.tar
 Source1: package-supported.png
 Source2: %name.conf
 
-Source10: %name-manual.ru.po
-Source11: %name-help.ru.tar
-
 Patch1: %name-%version-alt.patch
-Patch10: %name-0.58-alt-help.ru.patch
 
 BuildRequires: libapt-devel >= 0.5.15lorg2-alt72
 %if_enabled autotools
@@ -63,9 +60,6 @@ install -p -m644 %SOURCE1 pixmaps/hicolor/16x16/package-supported.png
 
 # bootstrap russian help files
 gnome-doc-prepare --copy --force
-%patch10
-cp %SOURCE10 po-manual/%name-manual.ru.po
-tar -xf %SOURCE11 --strip-components=1 -C help
 /usr/bin/xml2po -p po-manual/synaptic-manual.ru.po -o help/ru/synaptic.xml help/C/synaptic.xml
 
 %build
@@ -114,6 +108,9 @@ install -p -m644 %SOURCE2 %buildroot%_sysconfdir/apt/apt.conf.d/%name.conf
 %exclude %_datadir/pixmaps/%name.png
 
 %changelog
+* Tue Nov 02 2021 Aleksei Nikiforov <darktemplar@altlinux.org> 0.58-alt27
+- Packaged russian help build implemented by aris@.
+
 * Mon Nov 01 2021 Yuri N. Sedunov <aris@altlinux.org> 0.58-alt26.1
 - added russian help
 

@@ -2,6 +2,3 @@ tar: @version@:synaptic
 diff: @version@:synaptic synaptic name=@name@-@version@-alt.patch
 copy?: *.conf
 copy?: *.png
-copy?: *.po
-copy?: *.patch
-tar: synaptic-help.ru name=synaptic-help.ru
