@@ -64,9 +64,9 @@ class RPackageManager {
    pkgPackageManager::OrderResult DoInstallPostFork(int statusFd=-1) {
       return (pm->Go(statusFd) == false) ? pkgPackageManager::Failed : Res;
    };
-#else
+#else // ALT's variant of the protected API (for custom callbacks)
    pkgPackageManager::OrderResult DoInstallPostFork() {
-      return (pm->Go() == false) ? pkgPackageManager::Failed : Res;
+      return (pm->Go(nullptr,nullptr) == false) ? pkgPackageManager::Failed : Res;
    };
 #endif
 
