@@ -2,3 +2,4 @@ tar: @version@:synaptic
 diff: @version@:synaptic synaptic name=@name@-@version@-alt.patch
 copy?: *.conf
 copy?: *.png
+copy?: *.po
