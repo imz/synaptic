@@ -6,7 +6,7 @@
 
 Name: synaptic
 Version: 0.58
-Release: alt28.1
+Release: alt28.2
 Summary: Graphical front-end for APT
 Summary(ru_RU.UTF-8): Графическая оболочка для APT
 Group: System/Configuration/Packaging
@@ -110,7 +110,7 @@ install -p -m644 %SOURCE2 %buildroot%_sysconfdir/apt/apt.conf.d/%name.conf
 %exclude %_datadir/pixmaps/%name.png
 
 %changelog
-* Thu Jun 09 2022 Hihin Ruslan <ruslandh@altlinux.ru> 0.58-alt28.1
+* Mon Jun 13 2022 Hihin Ruslan <ruslandh@altlinux.ru> 0.58-alt28.2
 - NMU: added russian tranlation from gammaray_basealt.ru
 - Thanks gosts_87@ for creating bugs and trying to translate (ALT bug 42843)
 
