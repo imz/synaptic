@@ -140,6 +140,6 @@ string trans_section(const string &sec)
 #else
 string trans_section(const string &sec)
 {
-   return dgettext("rpm", sec.c_str());
+   return dgettext("synaptic", sec.c_str());
 }
 #endif
