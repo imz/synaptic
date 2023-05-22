@@ -17,7 +17,6 @@ Url: http://www.nongnu.org/synaptic/
 Source: %name-%version.tar
 Source1: package-supported.png
 Source2: %name.conf
-Source3: %name-ru.po
 
 Patch1: %name-%version-alt.patch
 
@@ -58,7 +57,6 @@ Synaptic - это графическая оболочка для APT (Advanced P
 %patch1 -p1
 
 install -p -m644 %SOURCE1 pixmaps/hicolor/16x16/package-supported.png
-install -p -m644 %SOURCE3 po/ru.po
 
 # bootstrap russian help files
 gnome-doc-prepare --copy --force
@@ -611,5 +609,3 @@ install -p -m644 %SOURCE2 %buildroot%_sysconfdir/apt/apt.conf.d/%name.conf
 * Mon Jan 15 2001 Alfredo K. Kojima <kojima@conectiva.com.br>
 + raptor-0.2-1cl
 - release version 0.2 (first)
-
-
