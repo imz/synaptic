@@ -10,6 +10,8 @@ Release: alt28.2
 Summary: Graphical front-end for APT
 Summary(ru_RU.UTF-8): Графическая оболочка для APT
 Group: System/Configuration/Packaging
+# common/rtagcoll{filter,builder}.cc list LGPL-2.1+,
+# but that doesn't change the overall license
 License: GPL-2.0+
 Url: http://www.nongnu.org/synaptic/
 
