@@ -6,7 +6,7 @@
 
 Name: synaptic
 Version: 0.58
-Release: alt28.2
+Release: alt29
 Summary: Graphical front-end for APT
 Summary(ru_RU.UTF-8): Графическая оболочка для APT
 Group: System/Configuration/Packaging
@@ -110,6 +110,12 @@ install -p -m644 %SOURCE2 %buildroot%_sysconfdir/apt/apt.conf.d/%name.conf
 %exclude %_datadir/pixmaps/%name.png
 
 %changelog
+* Tue May 23 2023 Ivan Zakharyaschev <imz@altlinux.org> 0.58-alt29
+- Enabled the dialog to show changelogs. (In ALT, they are in the index,
+  unlike in Debian, where they have to be downloaded separately.)
+  Find it in the top menu: "Package" -> "Download Changelog". (TODO/patches
+  are welcome: Place it along the package properties like dependencies.)
+
 * Mon Jun 13 2022 Hihin Ruslan <ruslandh@altlinux.ru> 0.58-alt28.2
 - NMU: added russian tranlation from gammaray_basealt.ru
 - Thanks gosts_87@ for creating bugs and trying to translate (ALT bug 42843)
