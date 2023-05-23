@@ -147,6 +147,7 @@ class RPackage {
    
    const char *maintainer();
    const char *vendor();
+   std::string changelog();
 
    const char *installedVersion();
    long installedSize();

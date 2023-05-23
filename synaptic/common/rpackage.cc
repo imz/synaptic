@@ -154,6 +154,18 @@ const char *RPackage::vendor()
    return "dunno";
 }
 
+
+std::string RPackage::changelog()
+{
+   pkgCache::VerIterator ver = (*_depcache)[*_package].CandidateVerIter(*_depcache);
+   if (!ver.end()) {
+      pkgRecords::Parser & parser = _records->Lookup(ver.FileList());
+      return parser.Changelog();
+   }
+   return std::string();
+}
+
+
 const char *RPackage::installedVersion()
 {
    if ((*_package)->CurrentVer == 0)

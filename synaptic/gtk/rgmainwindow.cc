@@ -1210,7 +1210,6 @@ void RGMainWindow::buildInterface()
    gtk_widget_hide(_purgeM);
    gtk_widget_hide(_pkgReconfigureM);
    gtk_widget_hide(_pkgHelpM);
-   gtk_widget_hide(_dl_changelogM);
    gtk_widget_hide(glade_xml_get_widget(_gladeXML,"separator_debian"));
 #endif
    
@@ -1875,16 +1874,13 @@ void RGMainWindow::cbChangelogDialog(GtkWidget *self, void *data)
    RPackage *pkg = me->selectedPackage();
    if(pkg == NULL)
       return;
-    
-   me->setInterfaceLocked(TRUE);
-   RGFetchProgress *status = new RGFetchProgress(me);;
-   status->setDescription(_("Downloading changelog"),
-			  _("The changelog contains information about the"
-             " changes and closed bugs in each version of"
-             " the package."));
-   pkgAcquire fetcher(status);
-   string filename = pkg->getChangelogFile(&fetcher);
-   
+
+   // Probably the locking is only needed when it is downloaded like in Debian;
+   // in ALT, it comes directly from the index.
+   //me->setInterfaceLocked(TRUE);
+
+   std::string const changelog = pkg->changelog();
+
    RGGladeUserDialog dia(me,"changelog");
 
    // set title
@@ -1906,23 +1902,19 @@ void RGMainWindow::cbChangelogDialog(GtkWidget *self, void *data)
    gtk_text_buffer_get_start_iter (buffer, &start);
    gtk_text_buffer_get_end_iter(buffer,&end);
    gtk_text_buffer_delete(buffer,&start,&end);
-   
-   ifstream in(filename.c_str());
-   string s;
-   while(getline(in, s)) {
+
+   {
       // no need to free str later, it is allocated in a static buffer
-      const char *str = utf8(s.c_str());
+      const char * const str = utf8(changelog.c_str());
       if(str!=NULL)
 	 gtk_text_buffer_insert_at_cursor(buffer, str, -1);
-      gtk_text_buffer_insert_at_cursor(buffer, "\n", -1);
    }
    
    dia.run();
 
    // clean up
-   delete status;
-   unlink(filename.c_str());
-   me->setInterfaceLocked(FALSE);
+   // Not done in ALT--see above.
+   //me->setInterfaceLocked(FALSE);
 }
 
 
