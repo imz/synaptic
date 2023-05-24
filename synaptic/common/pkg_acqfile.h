@@ -13,7 +13,6 @@ class pkgAcqFileSane:public pkgAcquire::Item
 //  Based heavily on that class, though.
 {
   pkgAcquire::ItemDesc Desc;
-  string Md5Hash;
   unsigned int Retries;
 
 public:
@@ -21,7 +20,6 @@ public:
 		 const string &Description, const string &ShortDesc, const string &filename);
 
   virtual void Failed(string Message, pkgAcquire::MethodConfig *Cnf) override;
-  virtual string MD5Sum() override {return Md5Hash;}
   virtual string DescURI() override {return Desc.URI;}
   virtual ~pkgAcqFileSane() {}
 };
