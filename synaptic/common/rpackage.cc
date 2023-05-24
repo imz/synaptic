@@ -31,7 +31,6 @@
 
 #include "rpackage.h"
 #include "rpackagelister.h"
-#include "pkg_acqfile.h"
 
 #include "i18n.h"
 
@@ -810,52 +809,6 @@ void RPackage::setRemove(bool purge)
       _lister->notifyChange(this);
 }
 
-
-string RPackage::getChangelogFile(pkgAcquire *fetcher)
-{
-   string prefix;
-   string srcpkg = srcPackage();
-   string descr("Changelog for ");
-   descr+=name();
-
-   string src_section=section();
-   if(src_section.find('/')!=src_section.npos)
-      src_section=string(src_section, 0, src_section.find('/'));
-   else
-      src_section="main";
-
-   prefix+=srcpkg[0];
-   if(srcpkg.size()>3 && srcpkg[0]=='l' && srcpkg[1]=='i' && srcpkg[2]=='b')
-      prefix=std::string("lib")+srcpkg[3];
-
-   string verstr;
-   if(availableVersion() != NULL) 
-      verstr = availableVersion();
-   
-   if(verstr.find(':')!=verstr.npos)
-      verstr=string(verstr, verstr.find(':')+1);
-   char uri[512];
-   snprintf(uri,512,"http://packages.debian.org/changelogs/pool/%s/%s/%s/%s_%s/changelog",
-                               src_section.c_str(),
-                               prefix.c_str(),
-                               srcpkg.c_str(),
-                               srcpkg.c_str(),
-                               verstr.c_str());
-
-   //cout << "uri is: " << uri << endl;
-
-   // no need to translate this, the changelog is in english anyway
-   string filename = RTmpDir()+"/tmp_cl";
-   ofstream out(filename.c_str());
-   out << "Failed to fetch the changelog for " << name() << endl;
-   out << "URI was: " << uri << endl;
-   out.close();
-   new pkgAcqFileSane(fetcher, uri, descr, name(), filename);
-
-   fetcher->Run();
-
-   return filename;
-}
 
 string RPackage::getCanidateOrigin()
 {

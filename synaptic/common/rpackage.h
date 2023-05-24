@@ -128,9 +128,6 @@ class RPackage {
    const char *description();
    const char *installedFiles();
 
-   // get changelog file from the debian server (debian only of course)
-   string getChangelogFile(pkgAcquire *fetcher);
-
    vector<string> provides();
 
    // get all available versions (version, release)
