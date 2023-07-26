@@ -71,7 +71,7 @@
 static int descrBufferSize = 4096;
 static char *descrBuffer = new char[descrBufferSize];
 
-static char *parseDescription(const string &descr);
+static string parseDescription(const string &descr);
 
 
 RPackage::RPackage(RPackageLister *lister, pkgDepCache *depcache,
@@ -1151,7 +1151,7 @@ static char *stripWsParser(const string &descr)
 }
 
 
-static char *parseDescription(const string &descr)
+static string parseDescription(const string &descr)
 {
 
    if (descr.size() + 1 > size_t(descrBufferSize)) {
@@ -1173,8 +1173,7 @@ static char *parseDescription(const string &descr)
          return rpmParser(descr);
       case NO_PARSER:
       default:
-         strcpy(descrBuffer, descr.c_str());
-         return descrBuffer;
+         return descr;
    }
 }
 
