@@ -68,7 +68,7 @@
 
 #include "raptoptions.h"
 
-static int descrBufferSize = 4096;
+static size_t descrBufferSize = 4096;
 static char *descrBuffer = new char[descrBufferSize];
 
 static string parseDescription(const string &descr);
@@ -1115,7 +1115,7 @@ static char *stripWsParser(const string &descr)
 
 
    int state = 0;
-   char *pp = (char *)descrBuffer;
+   char *pp = descrBuffer;
 
    while (p != end) {
       switch (state) {
@@ -1154,7 +1154,7 @@ static char *stripWsParser(const string &descr)
 static string parseDescription(const string &descr)
 {
 
-   if (descr.size() + 1 > size_t(descrBufferSize)) {
+   if (descr.size() + 1 > descrBufferSize) {
       delete[] descrBuffer;
       descrBufferSize = descr.size() + 1;
       descrBuffer = new char[descrBufferSize];
