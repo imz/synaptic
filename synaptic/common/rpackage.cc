@@ -68,9 +68,6 @@
 
 #include "raptoptions.h"
 
-static size_t descrBufferSize = 4096;
-static char *descrBuffer = new char[descrBufferSize];
-
 static string parseDescription(const string &descr);
 
 
@@ -1056,7 +1053,7 @@ void RPackage::setRemoveWithDeps(bool shallow, bool purge)
 
 
 // description parser stuff
-static char *debParser(string descr)
+static string debParser(string descr)
 {
    unsigned int i;
    string::size_type nlpos=0;
@@ -1091,22 +1088,29 @@ static char *debParser(string descr)
 
       nlpos++;
    }
-   strcpy(descrBuffer, descr.c_str());
-   return descrBuffer;
+   return descr;
 }
-static char *rpmParser(string descr)
+static string rpmParser(string descr)
 {
    string::size_type pos = descr.find('\n');
    // delete first line
    if (pos != string::npos)
       descr.erase(0, pos + 2);  // del "\n " too
 
-   strcpy(descrBuffer, descr.c_str());
-   return descrBuffer;
+   return descr;
 }
 
-static char *stripWsParser(const string &descr)
+static string stripWsParser(const string &descr)
 {
+   static size_t descrBufferSize = 4096;
+   static char *descrBuffer = new char[descrBufferSize];
+
+   if (descr.size() + 1 > descrBufferSize) {
+      delete[] descrBuffer;
+      descrBufferSize = descr.size() + 1;
+      descrBuffer = new char[descrBufferSize];
+   }
+
    const char *end;
    const char *p;
 
@@ -1147,18 +1151,12 @@ static char *stripWsParser(const string &descr)
    }
    *pp = '\0';
 
-   return descrBuffer;
+   return string(descrBuffer, pp);
 }
 
 
 static string parseDescription(const string &descr)
 {
-
-   if (descr.size() + 1 > descrBufferSize) {
-      delete[] descrBuffer;
-      descrBufferSize = descr.size() + 1;
-      descrBuffer = new char[descrBufferSize];
-   }
 #ifdef HAVE_RPM
    int parser = _config->FindI("Synaptic::descriptionParser", NO_PARSER);
 #else
